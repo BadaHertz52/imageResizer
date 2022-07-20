@@ -175,7 +175,7 @@ return(
         >
         {url !==null &&
         <>
-        <div className='resizerBtns ratio'>
+        <div className='resizerBtns diagonal'>
           <button 
             className='leftTop'
             onMouseDown={(event)=>onMouseDownResizerBtn(event,left)}

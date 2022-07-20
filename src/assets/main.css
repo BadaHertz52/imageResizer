@@ -28,7 +28,7 @@
   color: #8e9aaf;
 }
 #footer a:link, #footer a:active, #footer a:visited, #footer a:hover {
-  text-decoration: none;
+  text-decodiagonaln: none;
   color: inherit;
 }
 
@@ -67,7 +67,7 @@
   font-size: 1rem;
   font-weight: bold;
   padding: 6px 24px;
-  text-decoration: none;
+  text-decodiagonaln: none;
   text-align: center;
 }
 #loader #loaderActualBtn:hover {
@@ -103,24 +103,24 @@
   padding: 0;
   background-color: rgba(255, 255, 255, 0);
 }
-#imgLoad .ratio button {
+#imgLoad .diagonal button {
   width: 20px;
   height: 20px;
   cursor: move;
 }
-#imgLoad .ratio button:hover {
+#imgLoad .diagonal button:hover {
   background-color: rgba(38, 38, 38, 0.331);
 }
-#imgLoad .ratio .leftTop, #imgLoad .ratio .rightTop {
+#imgLoad .diagonal .leftTop, #imgLoad .diagonal .rightTop {
   top: 0;
 }
-#imgLoad .ratio .leftTop, #imgLoad .ratio .leftBottom {
+#imgLoad .diagonal .leftTop, #imgLoad .diagonal .leftBottom {
   left: 0;
 }
-#imgLoad .ratio .rightTop, #imgLoad .ratio .rightBottom {
+#imgLoad .diagonal .rightTop, #imgLoad .diagonal .rightBottom {
   right: 0;
 }
-#imgLoad .ratio .leftBottom, #imgLoad .ratio .rightBottom {
+#imgLoad .diagonal .leftBottom, #imgLoad .diagonal .rightBottom {
   bottom: 0;
 }
 #imgLoad .horizontal button {
