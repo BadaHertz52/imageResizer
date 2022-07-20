@@ -1,0 +1,172 @@
+#root {
+  width: 100vw;
+  height: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#inner {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+#inner header {
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#footer {
+  margin-top: 2rem;
+  font-size: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  color: #8e9aaf;
+}
+#footer a:link, #footer a:active, #footer a:visited, #footer a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+#inner_body {
+  box-sizing: border-box;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 30vh;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  box-shadow: 0px 0px 15px 2px rgba(190, 190, 190, 0.45);
+}
+
+#loader {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#loader #loaderActualBtn {
+  width: 70%;
+  box-shadow: inset 0px 1px 0px 0px #9fb4f2;
+  background: linear-gradient(to bottom, #378ec5 5%, #1b7cb8 100%);
+  background-color: #378ec5;
+  border-radius: 6px;
+  border: 1px solid #dae1f7;
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+  font-family: Arial;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-align: center;
+}
+#loader #loaderActualBtn:hover {
+  background: linear-gradient(to bottom, #1564c5 5%, #378ec5 100%);
+  background-color: #476e9e;
+}
+#loader #loaderActualBtn:active {
+  position: relative;
+  top: 1px;
+}
+#loader input {
+  position: absolute;
+  top: -1000vh;
+}
+
+#imgLoad {
+  position: relative;
+  width: 100%;
+  transition: width 300ms ease;
+  transition: height 300ms ease;
+}
+#imgLoad .resizerBtns {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#imgLoad .resizerBtns button {
+  position: absolute;
+  border: none;
+  z-index: 10;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0);
+}
+#imgLoad .ratio button {
+  width: 20px;
+  height: 20px;
+  cursor: move;
+}
+#imgLoad .ratio button:hover {
+  background-color: rgba(38, 38, 38, 0.331);
+}
+#imgLoad .ratio .leftTop, #imgLoad .ratio .rightTop {
+  top: 0;
+}
+#imgLoad .ratio .leftTop, #imgLoad .ratio .leftBottom {
+  left: 0;
+}
+#imgLoad .ratio .rightTop, #imgLoad .ratio .rightBottom {
+  right: 0;
+}
+#imgLoad .ratio .leftBottom, #imgLoad .ratio .rightBottom {
+  bottom: 0;
+}
+#imgLoad .horizontal button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#imgLoad .horizontal .left, #imgLoad .horizontal .right {
+  height: calc(100% - 50px);
+  width: 1rem;
+  top: 25px;
+  cursor: col-resize;
+}
+#imgLoad .horizontal .left .resizerPointer, #imgLoad .horizontal .right .resizerPointer {
+  height: 50%;
+  width: 5px;
+}
+#imgLoad .horizontal .top, #imgLoad .horizontal .bottom {
+  width: calc(100% - 50px);
+  height: 1rem;
+  left: 25px;
+  cursor: row-resize;
+}
+#imgLoad .horizontal .top .resizerPointer, #imgLoad .horizontal .bottom .resizerPointer {
+  width: 50%;
+  height: 5px;
+}
+#imgLoad .horizontal .left {
+  left: 0;
+}
+#imgLoad .horizontal .right {
+  right: 0;
+}
+#imgLoad .horizontal .top {
+  top: 0;
+}
+#imgLoad .horizontal .bottom {
+  bottom: 0;
+}
+#imgLoad .resizerPointer:hover {
+  content: " ";
+  border: 1px solid rgba(0, 0, 0, 0.212);
+  background-color: rgba(0, 0, 0, 0.11);
+  border-radius: 5px;
+  margin: 0;
+}
+#imgLoad image {
+  position: relative;
+}/*# sourceMappingURL=main.css.map */
