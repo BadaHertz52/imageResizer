@@ -6,24 +6,21 @@ require("./assets/main.css");
 const ai_1 = require("../node_modules/react-icons/ai");
 const gi_1 = require("../node_modules/react-icons/gi");
 const si_1 = require("../node_modules/react-icons/si");
+const io5_1 = require("../node_modules/react-icons/io5");
+const io_1 = require("../node_modules/react-icons/io");
 const App = () => {
     const root = document.getElementById("root");
     const innerBody = document.getElementById("inner_body");
     const imgLoad = document.getElementById("imgLoad");
     const [url, setUrl] = (0, react_1.useState)(null);
-    const initialImgStyle = {
-        width: "100%",
-        height: "auto"
-    };
+    const [widthInput, setWidthInput] = (0, react_1.useState)(null);
+    const [heightInput, setHeightInput] = (0, react_1.useState)(null);
     const initialImgLoadStyle = {
-        width: "80%",
-        height: "auto"
+        maxWidth: "80%",
+        maxHeight: "60%",
     };
-    const [imgStyle, setImgStyle] = (0, react_1.useState)(initialImgStyle);
     const [imgLoadStyle, setImgLoadStyle] = (0, react_1.useState)(initialImgLoadStyle);
     (0, react_1.useEffect)(() => {
-        imgStyle !== initialImgStyle &&
-            setImgStyle(initialImgStyle);
         imgLoadStyle !== initialImgLoadStyle &&
             setImgLoadStyle(initialImgLoadStyle);
     }, [url]);
@@ -32,11 +29,37 @@ const App = () => {
     const right = "right";
     const top = "top";
     const bottom = "bottom";
-    const dragDirection = (0, react_1.useRef)(left);
+    const dragDirection = (0, react_1.useRef)(null);
     const previousClient = (0, react_1.useRef)({
         x: 0,
         y: 0
     });
+    const onChangeWidthInput = (event) => {
+        const value = event.target.value;
+        setWidthInput(value);
+    };
+    const onChangeHeightInput = (event) => {
+        const value = event.target.value;
+        setHeightInput(value);
+    };
+    const resizerByKeypressBtn = (event) => {
+        event.preventDefault();
+        const style = {
+            width: widthInput === null ? "auto" : `${widthInput}px`,
+            height: heightInput === null ? "auton" : `${heightInput}px`
+        };
+        setImgLoadStyle(style);
+    };
+    const onMouseOverActualBtn = (event) => {
+        const currentTarget = event.currentTarget;
+        const fileType = currentTarget.nextElementSibling;
+        fileType === null || fileType === void 0 ? void 0 : fileType.classList.toggle("on");
+    };
+    const onMouseOutActualBtn = (event) => {
+        const currentTarget = event.currentTarget;
+        const fileType = currentTarget.nextElementSibling;
+        (fileType === null || fileType === void 0 ? void 0 : fileType.classList.contains("on")) && (fileType === null || fileType === void 0 ? void 0 : fileType.classList.remove("on"));
+    };
     const onChangeFile = (event) => {
         const files = event.target.files;
         if (files !== null) {
@@ -57,6 +80,7 @@ const App = () => {
         dragDirection.current = direction;
     };
     const onMouseMoveImgLoad = (event) => {
+        var _a, _b;
         if (drag.current) {
             const changeX = event.clientX - previousClient.current.x;
             const changeY = event.clientY - previousClient.current.y;
@@ -64,11 +88,11 @@ const App = () => {
             if (imageDoc !== null) {
                 const imgWidth = imageDoc.offsetWidth;
                 const imgHeight = imageDoc.offsetWidth;
-                const width = dragDirection.current === left ?
+                const width = ((_a = dragDirection.current) === null || _a === void 0 ? void 0 : _a.includes(left)) ?
                     imgWidth - changeX
                     :
                         imgWidth + changeX;
-                const height = dragDirection.current === bottom ?
+                const height = ((_b = dragDirection.current) === null || _b === void 0 ? void 0 : _b.includes(top)) ?
                     imgHeight - changeY
                     :
                         imgHeight + changeY;
@@ -83,7 +107,6 @@ const App = () => {
                         height: height,
                     };
                     if (width >= innerWidth) {
-                        drag.current = false;
                         style.width = innerWidth;
                     }
                     ;
@@ -91,16 +114,14 @@ const App = () => {
                         const innerBodyTop = innerBody.clientTop;
                         const imgLoadTop = imgLoad.clientTop;
                         const targetHeight = maxHeight - (imgLoadTop - innerBodyTop);
-                        drag.current = false;
                         style.height = targetHeight;
                     }
                     ;
                     if (width < 150 || height < 150) {
-                        drag.current = false;
                         width < 150 ? style.width = 150 : style.width = width;
                         height < 150 ? style.height = 150 : style.height = height;
                     }
-                    setImgStyle(style);
+                    console.log("style", imgWidth, imgHeight, style);
                     setImgLoadStyle(style);
                 }
                 else {
@@ -114,17 +135,17 @@ const App = () => {
         ;
     };
     const onMouseUpImgLoad = (event) => {
-        if (drag.current && imgStyle !== undefined) {
+        if (drag.current) {
             drag.current = false;
+            dragDirection.current = null;
             previousClient.current = {
                 x: 0,
                 y: 0
             };
-            setImgLoadStyle(imgStyle);
         }
         ;
     };
-    return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "inner", onMouseMove: onMouseMoveImgLoad, onMouseUp: onMouseUpImgLoad }, { children: [(0, jsx_runtime_1.jsx)("header", { children: "Image Resizer" }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "inner_body" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "loader" }, { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ id: "loaderActualBtn", htmlFor: 'loaderInput' }, { children: "Upload image file" })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'fileType' }, { children: "jpeg, jpg and png is possible" })), (0, jsx_runtime_1.jsx)("input", { id: "loaderInput", type: "file", accept: "image/jpeg, image/jpg, image/png", onChange: onChangeFile })] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ id: "imgLoad", style: imgLoadStyle }, { children: url !== null &&
-                            (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'resizerBtns diagonal' }, { children: [(0, jsx_runtime_1.jsx)("button", { className: 'leftTop', onMouseDown: (event) => onMouseDownResizerBtn(event, left) }), (0, jsx_runtime_1.jsx)("button", { className: 'rightTop', onMouseDown: (event) => onMouseDownResizerBtn(event, top) }), (0, jsx_runtime_1.jsx)("button", { className: 'leftBottom', onMouseDown: (event) => onMouseDownResizerBtn(event, right) }), (0, jsx_runtime_1.jsx)("button", { className: 'rightBottom', onMouseDown: (event) => onMouseDownResizerBtn(event, bottom) })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'resizerBtns horizontal' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'left ', onMouseDown: (event) => onMouseDownResizerBtn(event, left) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'top ', onMouseDown: (event) => onMouseDownResizerBtn(event, top) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'right', onMouseDown: (event) => onMouseDownResizerBtn(event, right) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'bottom ', onMouseDown: (event) => onMouseDownResizerBtn(event, bottom) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) }))] })), (0, jsx_runtime_1.jsx)("img", { id: "image", src: url, alt: "uploadedPhoto", style: imgStyle })] }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "footer" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "copyRight" }, { children: [(0, jsx_runtime_1.jsx)("span", { children: "\u00A9 2022.\u00A0" }), (0, jsx_runtime_1.jsxs)("span", Object.assign({ className: 'name' }, { children: ["BadaHertz52", (0, jsx_runtime_1.jsx)(gi_1.GiWhaleTail, {})] }))] })), (0, jsx_runtime_1.jsxs)("a", Object.assign({ href: 'https://github.com/settings/profile', "aria-details": "link to go writer(=badahertz52\r\n          )'s githug profile" }, { children: [(0, jsx_runtime_1.jsx)(ai_1.AiFillGithub, {}), "Github"] })), (0, jsx_runtime_1.jsxs)("a", Object.assign({ href: 'https://velog.io/@badahertz52', "aria-details": "link to go writer(=badahertz52\r\n          )'s blog" }, { children: [(0, jsx_runtime_1.jsx)(si_1.SiBlogger, {}), "blog"] }))] }))] })));
+    return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "inner", onMouseMove: onMouseMoveImgLoad, onMouseUp: onMouseUpImgLoad }, { children: [(0, jsx_runtime_1.jsx)("header", { children: "Image Resizer" }), (0, jsx_runtime_1.jsx)("div", Object.assign({ id: 'resizerExplain' }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'explian' }, { children: [(0, jsx_runtime_1.jsx)("p", { children: "You can change the size of the picture by dragging mouse or enter the desired size." }), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'moreExplainBtn' }, { children: (0, jsx_runtime_1.jsx)(io5_1.IoHelpCircleOutline, {}) })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'moreExplain' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'moreExplainCloseBtn' }, { children: (0, jsx_runtime_1.jsx)(io_1.IoIosCloseCircleOutline, {}) })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'moreExplainInner' }, { children: [(0, jsx_runtime_1.jsx)("p", { children: "When you change the size using the mouse, the size of the picture changes while maintaining the ratio of the original picture." }), (0, jsx_runtime_1.jsxs)("p", { children: ["If you waant to change size by dragging mouse,", (0, jsx_runtime_1.jsx)("br", {}), "Put your mouse over the top ,bottom, left or right of the picuture."] })] }))] }))] })) })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: 'reasizerByKeypress' }, { children: [(0, jsx_runtime_1.jsx)("div", { children: "Size:" }), (0, jsx_runtime_1.jsxs)("form", { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", { children: "Width" }), (0, jsx_runtime_1.jsx)("input", { type: "text", name: 'widthInput', id: "widthInput", onChange: onChangeWidthInput })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", { children: "Height" }), (0, jsx_runtime_1.jsx)("input", { type: "text", name: 'heightInput', id: "heightInput", onChange: onChangeHeightInput })] }), (0, jsx_runtime_1.jsx)("button", Object.assign({ onClick: resizerByKeypressBtn }, { children: "Resizer" }))] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "inner_body" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "loader" }, { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ id: "loaderActualBtn", htmlFor: 'loaderInput', onMouseEnter: onMouseOverActualBtn, onMouseOut: onMouseOutActualBtn }, { children: "Upload image file" })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'fileType' }, { children: "jpeg, jpg and png is possible" })), (0, jsx_runtime_1.jsx)("input", { id: "loaderInput", type: "file", accept: "image/jpeg, image/jpg, image/png", onChange: onChangeFile })] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ id: "load" }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ id: "imgLoad", style: imgLoadStyle }, { children: url !== null &&
+                                (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'resizerBtns ' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'left ', onMouseDown: (event) => onMouseDownResizerBtn(event, left) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'top ', onMouseDown: (event) => onMouseDownResizerBtn(event, top) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'right', onMouseDown: (event) => onMouseDownResizerBtn(event, right) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'bottom ', onMouseDown: (event) => onMouseDownResizerBtn(event, bottom) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) }))] })), (0, jsx_runtime_1.jsx)("img", { id: "image", src: url, alt: "uploadedPhoto" })] }) })) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "footer" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "copyRight" }, { children: [(0, jsx_runtime_1.jsx)("span", { children: "\u00A9 2022.\u00A0" }), (0, jsx_runtime_1.jsxs)("span", Object.assign({ className: 'name' }, { children: ["BadaHertz52", (0, jsx_runtime_1.jsx)(gi_1.GiWhaleTail, {})] }))] })), (0, jsx_runtime_1.jsxs)("a", Object.assign({ href: 'https://github.com/settings/profile', "aria-details": "link to go writer(=badahertz52\r\n          )'s githug profile" }, { children: [(0, jsx_runtime_1.jsx)(ai_1.AiFillGithub, {}), "Github"] })), (0, jsx_runtime_1.jsxs)("a", Object.assign({ href: 'https://velog.io/@badahertz52', "aria-details": "link to go writer(=badahertz52\r\n          )'s blog" }, { children: [(0, jsx_runtime_1.jsx)(si_1.SiBlogger, {}), "blog"] }))] }))] })));
 };
 exports.default = App;

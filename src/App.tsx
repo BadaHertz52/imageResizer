@@ -3,35 +3,33 @@ import './assets/main.css';
 import {AiFillGithub} from '../node_modules/react-icons/ai';
 import {GiWhaleTail} from '../node_modules/react-icons/gi'; 
 import {SiBlogger} from '../node_modules/react-icons/si';
+import {IoHelpCircleOutline} from '../node_modules/react-icons/io5';
+import {IoIosCloseCircleOutline} from '../node_modules/react-icons/io';
 
 const App =()=>{
   const root =document.getElementById("root");
   const innerBody =document.getElementById("inner_body");
   const imgLoad= document.getElementById("imgLoad");
   const [url, setUrl]=useState<string|null>(null);
-  const initialImgStyle:CSSProperties ={
-    width:"100%",
-    height:"auto"
+  const [widthInput, setWidthInput]=useState<string|null>(null);
+  const [heightInput,setHeightInput]=useState<string|null>(null)
+  const initialImgLoadStyle:CSSProperties ={
+    maxWidth:"80%",
+    maxHeight:"60%" ,
   };
-  const initialImgLoadStyle :CSSProperties ={
-    width:"80%",
-    height:"auto"};
-  const [imgStyle, setImgStyle]=useState<CSSProperties>(initialImgStyle);
   const [imgLoadStyle, setImgLoadStyle]=useState<CSSProperties>(initialImgLoadStyle);
   useEffect(()=>{
-    imgStyle !==initialImgStyle &&
-    setImgStyle(initialImgStyle);
     imgLoadStyle !== initialImgLoadStyle &&
     setImgLoadStyle(initialImgLoadStyle);
   },[url]);
+
   const drag =useRef<boolean>(false);
   const left ="left";
   const right ="right" ;
   const top ="top";
   const bottom ="bottom";
-  type directionType = typeof left |typeof right | typeof top | typeof bottom ;
-  const dragDirection =useRef<directionType>(left);
-
+  type directionType = typeof left |typeof right | typeof top | typeof bottom|null ; 
+  const dragDirection =useRef<directionType>(null);
   type clientType={
     x:number,
     y:number
@@ -40,7 +38,32 @@ const App =()=>{
     x:0,
     y:0
   });
-
+  const onChangeWidthInput=(event:ChangeEvent<HTMLInputElement>)=>{
+    const value =event.target.value; 
+    setWidthInput(value);
+  };
+  const onChangeHeightInput=(event:ChangeEvent<HTMLInputElement>)=>{
+    const value =event.target.value;
+    setHeightInput(value);
+  };
+  const resizerByKeypressBtn =(event:MouseEvent)=>{
+    event.preventDefault();
+    const style:CSSProperties ={
+      width: widthInput === null? "auto" : `${widthInput}px`,
+      height: heightInput === null? "auton": `${heightInput}px` 
+    };
+    setImgLoadStyle(style);
+  };
+  const onMouseOverActualBtn =(event:MouseEvent)=>{
+    const currentTarget =event.currentTarget;
+    const fileType =currentTarget.nextElementSibling;
+    fileType?.classList.toggle("on");
+  };
+  const onMouseOutActualBtn =(event:MouseEvent)=>{
+    const currentTarget =event.currentTarget;
+    const fileType =currentTarget.nextElementSibling;
+    fileType?.classList.contains("on") && fileType?.classList.remove("on");
+  }
   const onChangeFile=(event:ChangeEvent<HTMLInputElement>)=>{
     const files =event.target.files; 
     if(files !==null){
@@ -51,32 +74,33 @@ const App =()=>{
       console.log("There is no file")
     }
   };
+
   const onMouseDownResizerBtn=(event:MouseEvent, direction:directionType)=>{
     drag.current =true ;
     previousClient.current ={
       x: event.clientX,
       y: event.clientY
     };
-    dragDirection.current= direction ;
+    dragDirection.current = direction ;
   };
+
   const onMouseMoveImgLoad=(event:MouseEvent<HTMLDivElement>)=>{
     if(drag.current){
-      const changeX = event.clientX - previousClient.current.x ;
+      const changeX = event.clientX - previousClient.current.x
       const changeY =event.clientY - previousClient.current.y ;
       const imageDoc =document.getElementById("image");
-
       if(imageDoc !==null){
         const imgWidth= imageDoc.offsetWidth;
         const imgHeight= imageDoc.offsetWidth;
         
         const width = 
-        dragDirection.current === left? 
+        dragDirection.current?.includes(left)? 
         imgWidth -changeX 
         :
         imgWidth + changeX;
 
         const height =
-        dragDirection.current ===bottom?
+        dragDirection.current?.includes(top)?
         imgHeight -changeY
         :
         imgHeight + changeY ;
@@ -87,28 +111,29 @@ const App =()=>{
           const innerWidth = innerBody.clientWidth - padding*2 ;
           const innerHeight =innerBody.clientHeight ;
           const maxHeight =root.offsetHeight *0.9  
-          const style :CSSProperties ={
-            width: 
-              width ,
+          const style :CSSProperties =
+          {
+            width: width ,
             height : height,
-          };
+          }
+          ;
           if(width>= innerWidth){
-            drag.current = false;
+
             style.width =innerWidth;
           };
           if(innerHeight >= maxHeight && imgLoad !==null){
             const innerBodyTop = innerBody.clientTop;
             const imgLoadTop = imgLoad.clientTop;
             const targetHeight = maxHeight - (imgLoadTop -innerBodyTop);
-            drag.current =false;
+
             style.height = targetHeight;
           };
           if(width < 150 || height < 150){
-            drag.current =false;
+
             width< 150 ? style.width =150 : style.width =width;
             height< 150 ? style.height=150 : style.height =height;
           }
-          setImgStyle(style);
+          console.log("style",imgWidth,imgHeight, style)
           setImgLoadStyle(style);
         }else{
           console.log("Can't find inner")
@@ -121,13 +146,13 @@ const App =()=>{
   };
 
   const onMouseUpImgLoad=(event:MouseEvent<HTMLDivElement>)=>{
-    if(drag.current && imgStyle !==undefined){
+    if(drag.current){
       drag.current = false;
+      dragDirection.current= null;
       previousClient.current ={
         x:0,
         y:0
       };
-      setImgLoadStyle(imgStyle)
     };
   };
 
@@ -138,17 +163,72 @@ return(
     onMouseUp={onMouseUpImgLoad}  
   >
     <header>Image Resizer</header>
+    <div id='resizerExplain'>
+          <div className='explian'>
+            <p>
+              You can change the size of the picture by dragging mouse or enter the desired size.
+            </p>
+            <button className='moreExplainBtn'>
+              <IoHelpCircleOutline/>
+            </button>
+            <div className='moreExplain'>
+              <button className='moreExplainCloseBtn'>
+                <IoIosCloseCircleOutline/>
+              </button>
+              <div className='moreExplainInner'>
+                <p>
+                  When you change the size using the mouse, the size of the picture changes while maintaining the ratio of the original picture.
+                </p>
+                <p>
+                  If you waant to change size by dragging mouse,
+                  <br/>
+                  Put your mouse over the top ,bottom, left or right of the picuture.
+                </p>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div id='reasizerByKeypress'>
+      <div>Size:</div>
+      <form>
+        <div>
+          <label>Width</label>
+          <input
+          type="text"
+          name='widthInput'
+          id="widthInput"
+          onChange={onChangeWidthInput}
+        />
+        </div>
+        <div>
+          <label>Height</label>
+          <input
+          type="text"
+          name='heightInput'
+          id="heightInput"
+          onChange={onChangeHeightInput}
+        />
+        </div>
+        <button
+          onClick={resizerByKeypressBtn}
+        >
+          Resizer
+        </button>
+      </form>
+    </div>
     <div id="inner_body">
       <div id="loader">
-          <label
-            id="loaderActualBtn"
-            htmlFor='loaderInput'
-          >
-            Upload image file
-          </label>
-          <div className='fileType'>
-              jpeg, jpg and png is possible
-          </div>
+        <label
+          id="loaderActualBtn"
+          htmlFor='loaderInput'
+          onMouseEnter={onMouseOverActualBtn}
+          onMouseOut={onMouseOutActualBtn}
+        >
+          Upload image file
+        </label>
+        <div className='fileType'>
+            jpeg, jpg and png is possible
+        </div>
         <input
           id="loaderInput"
           type="file"
@@ -156,87 +236,53 @@ return(
           onChange={onChangeFile}
         />
       </div>
-      {/* {url !==null &&
-        <div id='resizderExplain'>
-          <p>
-            You can change the size of the picture by dragging the top, bottom, and bottom buttons.
-          </p>
-          <p>
-            Drag the left and right buttons to change the horizontal and vertical size of the picture.
-          </p>
-          <p>
-            Drag the up and down buttons only changes the portrait size of the picture.
-          </p>
+      <div id="load">
+        <div 
+            id="imgLoad"
+            style={imgLoadStyle}
+          >
+          {url !==null &&
+          <>
+          <div className='resizerBtns '>
+            <button 
+              className='left '
+              onMouseDown={(event)=>onMouseDownResizerBtn(event ,left)}
+            >
+              <div className='resizerPointer'>
+              </div>
+            </button>
+            <button 
+              className='top '
+              onMouseDown={(event)=>onMouseDownResizerBtn(event, top)}
+            >
+              <div className='resizerPointer'>
+              </div>
+            </button>
+            <button 
+              className='right'
+              onMouseDown={(event)=>onMouseDownResizerBtn(event,right)}
+            >
+              <div className='resizerPointer'>
+              </div>
+            </button>
+            <button 
+              className='bottom '
+              onMouseDown={(event)=>onMouseDownResizerBtn(event, bottom)}
+            >
+              <div className='resizerPointer'>
+              </div>
+            </button>
+          </div>
+            <img
+              id="image"
+              src={url}
+              alt="uploadedPhoto"
+            />
+          </>
+          }
         </div>
-      } */}
-      <div 
-          id="imgLoad"
-          style={imgLoadStyle}
-        >
-        {url !==null &&
-        <>
-        <div className='resizerBtns diagonal'>
-          <button 
-            className='leftTop'
-            onMouseDown={(event)=>onMouseDownResizerBtn(event,left)}
-          >
-          </button>
-          <button 
-            className='rightTop'
-            onMouseDown={(event)=>onMouseDownResizerBtn(event,top)}
-          >
-          </button>
-          <button 
-            className='leftBottom'
-            onMouseDown={(event)=>onMouseDownResizerBtn(event,right)}
-          >
-          </button>
-          <button 
-            className='rightBottom'
-            onMouseDown={(event)=>onMouseDownResizerBtn(event, bottom)}
-          >
-          </button>
-        </div>
-
-        <div className='resizerBtns horizontal'>
-          <button 
-            className='left '
-            onMouseDown={(event)=>onMouseDownResizerBtn(event,left)}
-          >
-            <div className='resizerPointer'>
-            </div>
-          </button>
-          <button 
-            className='top '
-            onMouseDown={(event)=>onMouseDownResizerBtn(event,top)}
-          >
-            <div className='resizerPointer'>
-            </div>
-          </button>
-          <button 
-            className='right'
-            onMouseDown={(event)=>onMouseDownResizerBtn(event,right)}
-          >
-            <div className='resizerPointer'>
-            </div>
-          </button>
-          <button 
-            className='bottom '
-            onMouseDown={(event)=>onMouseDownResizerBtn(event, bottom)}
-          >
-            <div className='resizerPointer'>
-            </div>
-          </button>
-        </div>
-          <img
-            id="image"
-            src={url}
-            alt="uploadedPhoto"
-            style={imgStyle}
-          />
-        </>
-        }
       </div>
+
     </div>
     <div id="footer">
       <div id="copyRight">

@@ -42,7 +42,6 @@
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: 1rem;
   box-shadow: 0px 0px 15px 2px rgba(190, 190, 190, 0.45);
 }
@@ -67,7 +66,8 @@
   font-size: 1rem;
   font-weight: bold;
   padding: 6px 24px;
-  text-decodiagonaln: none;
+  margin-bottom: 6px;
+  text-decoration: none;
   text-align: center;
 }
 #loader #loaderActualBtn:hover {
@@ -78,16 +78,37 @@
   position: relative;
   top: 1px;
 }
+#loader .fileType {
+  display: none;
+}
+#loader .fileType.on {
+  display: block;
+  transition: display 300ms ease;
+  font-size: 12px;
+  color: grey;
+}
 #loader input {
   position: absolute;
   top: -1000vh;
 }
 
+#load {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
 #imgLoad {
   position: relative;
   width: 100%;
-  transition: width 300ms ease;
-  transition: height 300ms ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 #imgLoad .resizerBtns {
   width: 100%;
@@ -102,71 +123,51 @@
   z-index: 10;
   padding: 0;
   background-color: rgba(255, 255, 255, 0);
-}
-#imgLoad .diagonal button {
-  width: 20px;
-  height: 20px;
-  cursor: move;
-}
-#imgLoad .diagonal button:hover {
-  background-color: rgba(38, 38, 38, 0.331);
-}
-#imgLoad .diagonal .leftTop, #imgLoad .diagonal .rightTop {
-  top: 0;
-}
-#imgLoad .diagonal .leftTop, #imgLoad .diagonal .leftBottom {
-  left: 0;
-}
-#imgLoad .diagonal .rightTop, #imgLoad .diagonal .rightBottom {
-  right: 0;
-}
-#imgLoad .diagonal .leftBottom, #imgLoad .diagonal .rightBottom {
-  bottom: 0;
-}
-#imgLoad .horizontal button {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#imgLoad .horizontal .left, #imgLoad .horizontal .right {
-  height: calc(100% - 50px);
+#imgLoad .left, #imgLoad .right {
+  height: calc(100% - 100px);
   width: 1rem;
-  top: 25px;
+  top: 50px;
   cursor: col-resize;
 }
-#imgLoad .horizontal .left .resizerPointer, #imgLoad .horizontal .right .resizerPointer {
+#imgLoad .left .resizerPointer, #imgLoad .right .resizerPointer {
   height: 50%;
-  width: 5px;
+  width: 10px;
 }
-#imgLoad .horizontal .top, #imgLoad .horizontal .bottom {
-  width: calc(100% - 50px);
+#imgLoad .top, #imgLoad .bottom {
+  width: calc(100% - 100px);
   height: 1rem;
-  left: 25px;
+  left: 50px;
   cursor: row-resize;
 }
-#imgLoad .horizontal .top .resizerPointer, #imgLoad .horizontal .bottom .resizerPointer {
+#imgLoad .top .resizerPointer, #imgLoad .bottom .resizerPointer {
   width: 50%;
-  height: 5px;
+  height: 10px;
 }
-#imgLoad .horizontal .left {
+#imgLoad .left {
   left: 0;
 }
-#imgLoad .horizontal .right {
+#imgLoad .right {
   right: 0;
 }
-#imgLoad .horizontal .top {
+#imgLoad .top {
   top: 0;
 }
-#imgLoad .horizontal .bottom {
+#imgLoad .bottom {
   bottom: 0;
 }
 #imgLoad .resizerPointer:hover {
   content: " ";
-  border: 1px solid rgba(0, 0, 0, 0.212);
+  border: 2px solid rgba(206, 206, 206, 0.612);
   background-color: rgba(0, 0, 0, 0.11);
   border-radius: 5px;
   margin: 0;
 }
-#imgLoad image {
+#imgLoad #image {
   position: relative;
+  width: 100%;
+  height: 100%;
 }/*# sourceMappingURL=main.css.map */
