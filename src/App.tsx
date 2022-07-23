@@ -8,20 +8,18 @@ import {IoIosCloseCircleOutline} from '../node_modules/react-icons/io';
 
 const App =()=>{
   const root =document.getElementById("root");
-  const innerBody =document.getElementById("inner_body");
-  const imgLoad= document.getElementById("imgLoad");
+  const canvas =document.getElementById("canvas");
+  const loader =document.getElementById("loader");
   const [url, setUrl]=useState<string|null>(null);
   const [widthInput, setWidthInput]=useState<string|null>(null);
-  const [heightInput,setHeightInput]=useState<string|null>(null)
-  const initialImgLoadStyle:CSSProperties ={
-    maxWidth:"80%",
-    maxHeight:"60%" ,
-  };
-  const [imgLoadStyle, setImgLoadStyle]=useState<CSSProperties>(initialImgLoadStyle);
-  useEffect(()=>{
-    imgLoadStyle !== initialImgLoadStyle &&
-    setImgLoadStyle(initialImgLoadStyle);
-  },[url]);
+  const [heightInput,setHeightInput]=useState<string|null>(null);
+  const minWidth =100;
+  const minHeight =100;
+  const [maxSize, setMaxSize]=useState<{width:number|null, height: number|null}>({
+    width :null,
+    height:null 
+  })
+  const [imgLoadStyle, setImgLoadStyle]=useState<CSSProperties>();
 
   const drag =useRef<boolean>(false);
   const left ="left";
@@ -121,35 +119,25 @@ const App =()=>{
         :
         imgHeight + changeY ;
 
-        if(innerBody !==null && root !==null){
-          const innerPadding =window.getComputedStyle(innerBody).getPropertyValue('padding');
-          const padding =Number(innerPadding.slice(0, innerPadding.indexOf("px"))) ; 
-          const innerWidth = innerBody.clientWidth - padding*2 ;
-          const innerHeight =innerBody.clientHeight ;
-          const maxHeight =root.offsetHeight *0.9  
+        if(canvas!==null && maxSize.height !==null  &&maxSize.width!==null){
           const style :CSSProperties =
           {
             width: width ,
             height : height,
           }
           ;
-          if(width>= innerWidth){
-
-            style.width =innerWidth;
+          console.log("mex", maxSize, width, height)
+          if(width>= maxSize.width){
+            style.width =maxSize.width;
           };
-          if(innerHeight >= maxHeight && imgLoad !==null){
-            const innerBodyTop = innerBody.clientTop;
-            const imgLoadTop = imgLoad.clientTop;
-            const targetHeight = maxHeight - (imgLoadTop -innerBodyTop);
-
-            style.height = targetHeight;
+        
+          if(height>= maxSize.height){
+            style.height = maxSize.height;
           };
-          if(width < 150 || height < 150){
-
-            width< 150 ? style.width =150 : style.width =width;
-            height< 150 ? style.height=150 : style.height =height;
+          if(width < minWidth || height < minHeight){
+            width< 100 ? style.width = minWidth : style.width =width;
+            height< 100 ? style.height= minHeight: style.height =height;
           }
-          console.log("style",imgWidth,imgHeight, style)
           setImgLoadStyle(style);
         }else{
           console.log("Can't find inner")
@@ -171,7 +159,20 @@ const App =()=>{
       };
     };
   };
+  useEffect(()=>{
+    if(canvas !==null && root !==null && loader !==null){
+      const innerPadding =window.getComputedStyle(canvas).getPropertyValue('padding');
+      const padding =Number(innerPadding.slice(0, innerPadding.indexOf("px"))) ; 
+      const cavasWidth = canvas.clientWidth - padding*2 ;
+      const maxHeight =root.offsetHeight *0.6  ;
+      const targetHeight = maxHeight - loader.clientHeight -padding *2;
+      setMaxSize({
+        width:cavasWidth,
+        height:targetHeight
+      })
 
+    };
+  },[canvas, root ,loader]);
 return(
   <div 
     id="inner"
