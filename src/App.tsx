@@ -1,6 +1,6 @@
 import React, { ChangeEvent, CSSProperties, MouseEvent, useEffect, useRef, useState } from 'react';
 import './assets/main.css';
-import {AiFillGithub, AiOutlineClose} from '../node_modules/react-icons/ai';
+import {AiFillGithub} from '../node_modules/react-icons/ai';
 import {GiWhaleTail} from '../node_modules/react-icons/gi'; 
 import {SiBlogger} from '../node_modules/react-icons/si';
 import {IoHelpCircleOutline} from '../node_modules/react-icons/io5';
@@ -38,7 +38,6 @@ const App =()=>{
     x:0,
     y:0
   });
-  const moreDirection =document.getElementById("moreDirection");
   const onChangeWidthInput=(event:ChangeEvent<HTMLInputElement>)=>{
     const value =event.target.value; 
     setWidthInput(value);
@@ -75,22 +74,7 @@ const App =()=>{
       console.log("There is no file")
     }
   };
-  const onClickMoreDirectionBtn=(event:MouseEvent)=>{
-    if(moreDirection !==null){
-      onMouseOverMoreDirectionBtn(event);
-      moreDirection.classList.toggle("on");
-    }
-  };
-  function onMouseOverMoreDirectionBtn (event:MouseEvent){
-    if(!moreDirection?.classList.contains("on")){
-      const currentTarget= event.currentTarget;
-      const btnExplainBubble =currentTarget.getElementsByClassName("btnExplainBubble")[0];
-      btnExplainBubble.classList.toggle("on");
-    }
-  };
-  const onClickMoreDirectionCloseBtn=()=>{
-    moreDirection?.classList.remove("on");
-  }
+
   const onMouseDownResizerBtn=(event:MouseEvent, direction:directionType)=>{
     drag.current =true ;
     previousClient.current ={
@@ -179,74 +163,59 @@ return(
     onMouseUp={onMouseUpImgLoad}  
   >
     <header>Image Resizer</header>
-    <div id='directions'>
-      <div className='firstDirection'>
-        You can change the size of the picture by dragging mouse or enter the desired size.
-        <button 
-          className='moreDirectionBtn btn'
-          onClick={onClickMoreDirectionBtn}
-          onMouseOver={onMouseOverMoreDirectionBtn}
-          >
-          <IoHelpCircleOutline/>
-          <div className='btnExplainBubble'>
-            Press button to show more direction 
+    <div id='resizerExplain'>
+          <div className='explian'>
+            <p>
+              You can change the size of the picture by dragging mouse or enter the desired size.
+            </p>
+            <button className='moreExplainBtn'>
+              <IoHelpCircleOutline/>
+            </button>
+            <div className='moreExplain'>
+              <button className='moreExplainCloseBtn'>
+                <IoIosCloseCircleOutline/>
+              </button>
+              <div className='moreExplainInner'>
+                <p>
+                  When you change the size using the mouse, the size of the picture changes while maintaining the ratio of the original picture.
+                </p>
+                <p>
+                  If you waant to change size by dragging mouse,
+                  <br/>
+                  Put your mouse over the top ,bottom, left or right of the picuture.
+                </p>
+              </div>
+            </div>
           </div>
-        </button>
-      </div>
-      <div 
-        className='moreDirection'
-        id='moreDirection'
-      >
-        <button 
-          className='moreDirectionCloseBtn btn'
-          onClick={onClickMoreDirectionCloseBtn}
-        >
-          <IoIosCloseCircleOutline/>
-        </button>
-        <div className='moreDirectionInner'>
-          <p>
-            When you change the size using the mouse, the size of the picture changes while maintaining the ratio of the original picture.
-          </p>
-          <p>
-            If you waant to change size by dragging mouse,
-            <br/>
-            Put your mouse over the top ,bottom, left or right of the picuture.
-          </p>
-        </div>
-      </div>
- 
     </div>
-    {/* {url !==null &&} */}
-    
-    <form  id='resizerByKeypress'>
-      <div className='sizeInput'>
-        <label>width : </label>
-        <input
+    <div id='reasizerByKeypress'>
+      <div>Size:</div>
+      <form>
+        <div>
+          <label>Width</label>
+          <input
           type="text"
           name='widthInput'
           id="widthInput"
           onChange={onChangeWidthInput}
         />
-        <div>px</div>
-      </div>
-      <div className='sizeInput'>
-        <AiOutlineClose/>
-        <label>height : </label>
-        <input
+        </div>
+        <div>
+          <label>Height</label>
+          <input
           type="text"
           name='heightInput'
           id="heightInput"
           onChange={onChangeHeightInput}
         />
-        <div>px</div>
-      </div>
-      <button
-        onClick={resizerByKeypressBtn}
-        className="resizerByKeypressBtn"
-      >
-        Resizer
-      </button>
-    </form>
+        </div>
+        <button
+          onClick={resizerByKeypressBtn}
+        >
+          Resizer
+        </button>
+      </form>
+    </div>
     <div id="inner_body">
       <div id="loader">
         <label
