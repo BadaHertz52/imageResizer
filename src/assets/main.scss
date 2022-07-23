@@ -1,21 +1,22 @@
 $smallTextSize: 12px;
 $basicTextSize: 16px;
 $grey:  #e9e8e8;
-
+$darkgrey: rgb(119, 117, 117);
+$lightgrey:#F7F5F2;
 #root{
   width: 100vw;
   height: 100vw;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  
   button{
     background-color: initial;
     border: none;
   }
 }
 #inner{
-  width: 70%;
+  width: 80%;
+  margin-top: 10vh;
   display: flex;
   flex-direction: column;
   header{
@@ -66,22 +67,30 @@ $grey:  #e9e8e8;
   display: none;
 }
 .moreDirection.on{
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top:100%;
   left: 0;
   width: 100%;
   height: fit-content;
-  padding:$basicTextSize;
+  padding:$basicTextSize * 1.5;
   box-sizing: border-box;
-  background-color: #f1f1f1;
+  background-color: $lightgrey;
   border-radius: 10px;
   z-index: 10;
   .moreDirectionCloseBtn{
     position: absolute;
-    top:$basicTextSize * 0.5;
-    right:$basicTextSize * 0.5;
+    top:$basicTextSize * 1.5 ;
+    right:$basicTextSize * 1.5 ;
     font-size: $basicTextSize;
+  }
+  .moreDirectionInner{
+    width: fit-content;
+    p{
+      width: fit-content;
+    }
   }
 }
 #footer{
@@ -96,13 +105,22 @@ $grey:  #e9e8e8;
     color: inherit;
   }
 }
+#sizeBord{
+  display: flex;
+  padding: $basicTextSize 0;
+  height: fit-content;
+  header {
+    font-size: $basicTextSize;
+    font-weight: bold;
+  }
+}
 #resizerByKeypress{
-  margin: $basicTextSize 0;
   display: flex;
   flex-direction: column; 
-  width: 200px;
-  padding: $basicTextSize 0;
-  padding-left : calc(50% - 100px);
+  justify-content: space-evenly;
+  width: 40%;
+  height: 100%;
+  margin-right: 5%;
   .sizeInput{
     display: flex;
     flex-direction: row;
@@ -116,10 +134,11 @@ $grey:  #e9e8e8;
       margin: 0 $basicTextSize;
     }
   }
-  .sizeInput:first-child{
-    margin-left: $basicTextSize *2 ;
-  }
   .sizeInput:nth-child(2){
+    margin-left: $basicTextSize *2 ;
+
+  }
+  .sizeInput:nth-child(3){
     svg {
       margin-right:  $basicTextSize;
     }
@@ -128,15 +147,59 @@ $grey:  #e9e8e8;
   .resizerByKeypressBtn{
     margin-top: $basicTextSize * 0.5;
     padding: $basicTextSize * 0.8;
-    background-color: $grey;
+    border-radius: 10px;
+    background:linear-gradient(to bottom, rgb(251, 251, 251) 5%, $grey 100%);
+    border: 1px solid rgba(230, 230, 230, 0.45);
+    &:hover{
+      background:linear-gradient(to bottom, rgba(230, 230, 230, 0.45) 5%,  rgb(251, 251, 251) 100%  );
+      background-color:$grey;
+      -webkit-box-shadow: 0px 0px 1px 1px rgba(190,190,190,0.45); 
+      box-shadow: 0px 0px 1px 1px rgba(190,190,190,0.45);
+    }
   }
 }
-#inner_body{
+#sizeDirection {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background-color:$lightgrey;
+  padding: 10px;
+  box-sizing: border-box;
+  .sizes{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    #maxSize , #minSize , #imgSize{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      color: $darkgrey;
+      margin-bottom: 10px;
+      header{
+        font-size: $basicTextSize;
+        font-weight: 600;
+      }
+      .size{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        font-size: $smallTextSize;
+        & > div{
+          width: 50%;
+        }
+      }
+    }
+    header{
+      text-align: left;
+      margin-bottom: 5px;
+    }
+  }
+}
+#canvas{
+  margin-top: $basicTextSize;
   box-sizing: border-box;
   width: 100%;
   height: fit-content;
-  min-height: 30vh;
-  max-height: 90vh;
   display: flex;
   flex-direction: column;
   padding:1rem;
@@ -190,7 +253,7 @@ $grey:  #e9e8e8;
 }
 #load{
   width: 100%;
-  height: 100%;
+  height: fit-content;
   padding: 1rem;
   display: flex;
   align-items: center;
@@ -223,24 +286,24 @@ $grey:  #e9e8e8;
   }
 
   .left , .right{
-    height: calc(100% - 100px);
+    height: calc(100% - 2rem);
     width: 1rem;
-    top: 50px;
+    top: 1rem;
     cursor: col-resize;
   }
   .left .resizerPointer , .right .resizerPointer{
-    height: 50%;
-    width: 10px;
+    height: 100%;
+    width: 1rem;
   }
   .top , .bottom{
-    width: calc(100% - 100px);
+    width: calc(100% - 2rem);
     height: 1rem;
-    left:50px;
+    left:1rem;
     cursor: row-resize;
   }
   .top .resizerPointer , .bottom .resizerPointer{
-    width: 50%;
-    height: 10px;
+    width: 100%;
+    height: 1rem;
   }
   .left {
     left:0
