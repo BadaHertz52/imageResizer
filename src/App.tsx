@@ -225,38 +225,109 @@ return(
       </div>
  
     </div>
-    {/* {url !==null &&} */}
-    
-    <form  id='resizerByKeypress'>
-      <div className='sizeInput'>
-        <label>width : </label>
-        <input
-          type="text"
-          name='widthInput'
-          id="widthInput"
-          onChange={onChangeWidthInput}
-        />
-        <div>px</div>
-      </div>
-      <div className='sizeInput'>
-        <AiOutlineClose/>
-        <label>height : </label>
-        <input
-          type="text"
-          name='heightInput'
-          id="heightInput"
-          onChange={onChangeHeightInput}
-        />
-        <div>px</div>
-      </div>
-      <button
-        onClick={resizerByKeypressBtn}
-        className="resizerByKeypressBtn"
-      >
-        Resizer
-      </button>
-    </form>
-    <div id="inner_body">
+    {url !==null &&
+    <div id="sizeBord">
+      <form  id='resizerByKeypress'>
+        <header> Enter size</header>
+        <div className='sizeInput'>
+          <label
+            htmlFor='widthInput'
+          >
+            width &nbsp;:
+
+          </label>
+          <input
+            type="text"
+            name='widthInput'
+            id="widthInput"
+            onChange={onChangeWidthInput}
+          />
+          <div>px</div>
+        </div>
+        <div className='sizeInput'>
+          <AiOutlineClose/>
+          <label
+            htmlFor='heightInput'
+          >
+            height : 
+          </label>
+          <input
+            type="text"
+            name='heightInput'
+            id="heightInput"
+            onChange={onChangeHeightInput}
+          />
+          <div>px</div>
+        </div>
+        <button
+          onClick={resizerByKeypressBtn}
+          className="resizerByKeypressBtn"
+        >
+          Resizer
+        </button>
+      </form>
+      {maxSize.height !== null && maxSize.width!==null &&
+        <div id="sizeDirection">
+          <header>
+              Size
+          </header>
+          <div className='sizes'>
+            <div  id="maxSize">
+              <header>
+                Maximum
+              </header>
+              <div className='size'>
+                <div>
+                    width:
+                    &nbsp;
+                    {maxSize.width}px
+                </div>
+                <div>
+                    height:
+                    &nbsp;
+                    {maxSize.height}px
+                </div>
+              </div>
+            </div>
+            <div id="minSize">
+              <header>Minium</header>
+              <div className="size">
+                <div>
+                  width :
+                  &nbsp;
+                  {minWidth}px
+                </div>
+                <div>
+                    height : 
+                    &nbsp;
+                    {minHeight}px
+                </div>
+              </div>
+            </div>
+            {imgLoadStyle!== undefined &&
+              <div id="imgSize">
+                <header>Photo size</header>
+                <div className="size">
+                  <div>
+                    width : 
+                    &nbsp;
+                    {imgLoadStyle.width}px
+                  </div>
+                  <div>
+                    height:
+                    &nbsp;
+                    {imgLoadStyle.height}px
+                  </div>
+                </div>
+              </div>  
+            }
+            </div>
+        </div>
+      }
+    </div>
+    }
+
+    <div id="canvas">
       <div id="loader">
         <label
           id="loaderActualBtn"
