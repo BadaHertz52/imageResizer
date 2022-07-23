@@ -6,6 +6,10 @@
   align-items: center;
   justify-content: center;
 }
+#root button {
+  background-color: initial;
+  border: none;
+}
 
 #inner {
   width: 70%;
@@ -19,6 +23,77 @@
   margin-bottom: 1rem;
 }
 
+#directions {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+}
+#directions button {
+  color: rgb(134, 134, 134);
+}
+#directions button:hover {
+  color: black;
+}
+
+.firstDirection {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.moreDirectionBtn {
+  position: absolute;
+  bottom: 0;
+  right: 2rem;
+  padding: 0;
+  font-size: 16px;
+}
+
+.btnExplainBubble {
+  display: none;
+}
+.btnExplainBubble.on {
+  display: block;
+  position: absolute;
+  bottom: -1.2rem;
+  right: 10px;
+  width: 200px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 12px;
+  padding: 5px;
+  background-color: #e9e8e8;
+}
+
+.moreDirection {
+  display: none;
+}
+
+.moreDirection.on {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  z-index: 10;
+}
+.moreDirection.on .moreDirectionCloseBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 16px;
+}
+
 #footer {
   margin-top: 2rem;
   font-size: 14px;
@@ -28,8 +103,45 @@
   color: #8e9aaf;
 }
 #footer a:link, #footer a:active, #footer a:visited, #footer a:hover {
-  text-decodiagonaln: none;
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none;
   color: inherit;
+}
+
+#resizerByKeypress {
+  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 16px 0;
+  padding-left: calc(50% - 100px);
+}
+#resizerByKeypress .sizeInput {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 16px;
+  align-items: center;
+}
+#resizerByKeypress .sizeInput label {
+  text-align: center;
+}
+#resizerByKeypress .sizeInput input {
+  width: 50px;
+  margin: 0 16px;
+}
+#resizerByKeypress .sizeInput:first-child {
+  margin-left: 32px;
+}
+#resizerByKeypress .sizeInput:nth-child(2) {
+  border-bottom: 1px solid black;
+}
+#resizerByKeypress .sizeInput:nth-child(2) svg {
+  margin-right: 16px;
+}
+#resizerByKeypress .resizerByKeypressBtn {
+  margin-top: 8px;
+  padding: 12.8px;
+  background-color: #e9e8e8;
 }
 
 #inner_body {
