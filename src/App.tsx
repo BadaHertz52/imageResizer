@@ -218,12 +218,10 @@ return(
           </p>
           <p>
             If you waant to change size by dragging mouse,
-            <br/>
             Put your mouse over the top ,bottom, left or right of the picuture.
           </p>
         </div>
       </div>
- 
     </div>
     {url !==null &&
     <div id="sizeBord">
@@ -347,12 +345,12 @@ return(
           onChange={onChangeFile}
         />
       </div>
+      {url !==null &&
       <div id="load">
         <div 
             id="imgLoad"
             style={imgLoadStyle}
           >
-          {url !==null &&
           <>
           <div className='resizerBtns '>
             <button 
@@ -390,10 +388,10 @@ return(
               alt="uploadedPhoto"
             />
           </>
-          }
+         
         </div>
       </div>
-
+      }
     </div>
     <div id="footer">
       <div id="copyRight">
