@@ -1,3 +1,7 @@
+$smallTextSize: 12px;
+$basicTextSize: 16px;
+$grey:  #e9e8e8;
+
 #root{
   width: 100vw;
   height: 100vw;
@@ -5,6 +9,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  button{
+    background-color: initial;
+    border: none;
+  }
 }
 #inner{
   width: 70%;
@@ -15,6 +23,65 @@
     width: 100%;
     text-align: center;
     margin-bottom: 1rem;
+  }
+}
+#directions{
+  width: 100%;
+  height: fit-content;
+  position: relative;
+  button{
+    color: rgb(134, 134, 134);
+    &:hover{
+      color:black;
+    }
+  }
+}
+.firstDirection{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.moreDirectionBtn {
+  position: absolute;
+  bottom:0;
+  right: 2rem;
+  padding: 0;
+  font-size: $basicTextSize;
+}
+.btnExplainBubble{
+  display: none;
+  &.on{
+    display: block;
+    position:absolute;
+    bottom: -1.2rem;
+    right: 10px;
+    width: 200px;
+    height: fit-content;
+    font-size: $smallTextSize;
+    padding: 5px;
+    background-color:$grey;
+  }
+}
+.moreDirection {
+  display: none;
+}
+.moreDirection.on{
+  display: block;
+  position: absolute;
+  top:100%;
+  left: 0;
+  width: 100%;
+  height: fit-content;
+  padding:$basicTextSize;
+  box-sizing: border-box;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  z-index: 10;
+  .moreDirectionCloseBtn{
+    position: absolute;
+    top:$basicTextSize * 0.5;
+    right:$basicTextSize * 0.5;
+    font-size: $basicTextSize;
   }
 }
 #footer{
