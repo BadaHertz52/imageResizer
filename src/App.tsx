@@ -74,9 +74,17 @@ const App =()=>{
     }
   };
   const onClickMoreDirectionBtn=(event:MouseEvent)=>{
+    const sizeBord =document.getElementById("sizeBord");
     if(moreDirection !==null){
       onMouseOverMoreDirectionBtn(event);
       moreDirection.classList.toggle("on");
+      const sizeBordHeight= sizeBord?.clientHeight;
+      if(sizeBord !==undefined){
+        moreDirection.setAttribute("style",`height: ${sizeBordHeight}px`);
+      };
+      const currentTarget= event.currentTarget;
+      const btnExplainBubble =currentTarget.getElementsByClassName("btnExplainBubble")[0];
+      btnExplainBubble.classList.contains("on")&& btnExplainBubble.classList.remove("on");
     }
   };
   function onMouseOverMoreDirectionBtn (event:MouseEvent){
