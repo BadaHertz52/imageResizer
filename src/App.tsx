@@ -39,7 +39,7 @@ const App =()=>{
   const moreDirection =document.getElementById("moreDirection");
   const makeNotificationForMax=(what:string, maxSize:number):string=>{
     return(
-      `The ${what} of the image can't exceed ${maxSize}px. ${<br/>} If you want to increase the maximum width, increase the screen size.`
+      `The ${what} of the image can't exceed ${maxSize}px.If you want to increase the maximum width, increase the screen size.`
     )
   };
 
@@ -50,51 +50,49 @@ const App =()=>{
   }
   const onChangeWidthInput=(event:ChangeEvent<HTMLInputElement>)=>{
     const value =event.target.value; 
-    if(maxSize.width !==null){
-      const width = Number(value); 
-      width > maxSize.width  ?
-      setNotification
-      (makeNotificationForMax("width", maxSize.width))
-      :
-      (width < minWidth ?
-        setNotification(
-          makeNotificationForMin("width", minWidth)
-        )
-        :
-        (()=>{
-          setWidthInput(value) ; 
-          setNotification(null);
-        })()
-      );
-    }
+    setWidthInput(value) ; 
   };
   const onChangeHeightInput=(event:ChangeEvent<HTMLInputElement>)=>{
     const value =event.target.value;
-    const height = Number(value);
-    if(maxSize.height !==null){
-      height> maxSize.height?
-      setNotification(makeNotificationForMax("height", maxSize.height))
-      :
-      (
-        height< minHeight ?
-        setNotification(makeNotificationForMin("height", minHeight))
-        :
-        (()=>{
-          setHeightInput(value);
-          setNotification(null);
-        })()
-      )
-    }
+    setHeightInput(value);
     ;
   };
   const resizerByKeypressBtn =(event:MouseEvent)=>{
     event.preventDefault();
     if(widthInput !==null || heightInput !==null){
+      const height =Number(heightInput);
+      const width =Number(widthInput);
       const style:CSSProperties ={
         width: widthInput === null? "auto" : `${widthInput}px`,
         height: heightInput === null? "auton": `${heightInput}px` 
       };
-      setImgLoadStyle(style);
+      
+      if(maxSize.height !==null && maxSize.width !==null){
+        const heightCondition = minHeight <= height && height <= maxSize.height;
+        const widthCondition = minWidth <= width && width <= maxSize.width ;
+        if(heightCondition && widthCondition){
+          setImgLoadStyle(style);
+          setNotification(null);
+        }else{
+          if(!heightCondition){
+            height> maxSize.height &&
+            setNotification(makeNotificationForMax("height", maxSize.height));
+
+            height< minHeight &&
+            setNotification(makeNotificationForMin("height", minHeight));
+          };
+          if(!widthCondition){
+            width > maxSize.width  &&
+            setNotification
+            (makeNotificationForMax("width", maxSize.width));
+
+            width < minWidth &&
+            setNotification(
+              makeNotificationForMin("width", minWidth)
+            );
+          }
+        }
+      }
       setWidthInput(null);
       setHeightInput(null);
     }else{
@@ -291,9 +289,11 @@ return(
 
           </label>
           <input
-            type="text"
+            type="number"
             name='widthInput'
             id="widthInput"
+            placeholder='number'
+            value={widthInput===null? "": widthInput}
             onChange={onChangeWidthInput}
           />
           <div>px</div>
@@ -306,9 +306,11 @@ return(
             height : 
           </label>
           <input
-            type="text"
+            type="number"
             name='heightInput'
             id="heightInput"
+            placeholder='number'
+            value={heightInput===null? "": heightInput}
             onChange={onChangeHeightInput}
           />
           <div>px</div>
