@@ -382,25 +382,45 @@ return(
     }
 
     <div id="canvas">
-      <div id="loader">
-        <label
-          id="loaderActualBtn"
-          htmlFor='loaderInput'
-          onMouseEnter={onMouseOverActualBtn}
-          onMouseOut={onMouseOutActualBtn}
-        >
-          Upload image file
-        </label>
-        <div className='fileType'>
-            jpeg, jpg and png is possible
+      <div className='canvas_top'>
+        <div id="loader">
+          <label
+            id="loaderActualBtn"
+            htmlFor='loaderInput'
+            onMouseEnter={onMouseOverActualBtn}
+            onMouseOut={onMouseOutActualBtn}
+          >
+            Upload image file
+          </label>
+          <div className='fileType'>
+              jpeg, jpg and png is possible
+          </div>
+          <input
+            id="loaderInput"
+            type="file"
+            accept ="image/jpeg, image/jpg, image/png"
+            onChange={onChangeFile}
+          />
         </div>
-        <input
-          id="loaderInput"
-          type="file"
-          accept ="image/jpeg, image/jpg, image/png"
-          onChange={onChangeFile}
-        />
+        {imgLoadStyle !==undefined &&
+        <div
+          id="downloader"
+        >
+          <button
+            className='downloadBtn'
+            onClick={downloadImg}
+          >
+            Download
+          </button>
+          <a
+            id="downlink"
+            href='/'
+          >
+          </a>
+        </div>
+        }
       </div>
+
       {url !==null &&
       <div id="load">
         <div 
