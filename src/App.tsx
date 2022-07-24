@@ -20,7 +20,7 @@ const App =()=>{
     height:null 
   })
   const [imgLoadStyle, setImgLoadStyle]=useState<CSSProperties>();
-
+  const [notification, setNotification]=useState<string|null>(null);
   const drag =useRef<boolean>(false);
   const left ="left";
   const right ="right" ;
@@ -37,21 +37,70 @@ const App =()=>{
     y:0
   });
   const moreDirection =document.getElementById("moreDirection");
+  const makeNotificationForMax=(what:string, maxSize:number):string=>{
+    return(
+      `The ${what} of the image can't exceed ${maxSize}px. ${<br/>} If you want to increase the maximum width, increase the screen size.`
+    )
+  };
+
+  const makeNotificationForMin =(what:string, minSize:number):string=>{
+    return(
+      `The ${what} of the image has to be greater than or equal to  ${minSize}px. Try again. `
+    )
+  }
   const onChangeWidthInput=(event:ChangeEvent<HTMLInputElement>)=>{
     const value =event.target.value; 
-    setWidthInput(value);
+    if(maxSize.width !==null){
+      const width = Number(value); 
+      width > maxSize.width  ?
+      setNotification
+      (makeNotificationForMax("width", maxSize.width))
+      :
+      (width < minWidth ?
+        setNotification(
+          makeNotificationForMin("width", minWidth)
+        )
+        :
+        (()=>{
+          setWidthInput(value) ; 
+          setNotification(null);
+        })()
+      );
+    }
   };
   const onChangeHeightInput=(event:ChangeEvent<HTMLInputElement>)=>{
     const value =event.target.value;
-    setHeightInput(value);
+    const height = Number(value);
+    if(maxSize.height !==null){
+      height> maxSize.height?
+      setNotification(makeNotificationForMax("height", maxSize.height))
+      :
+      (
+        height< minHeight ?
+        setNotification(makeNotificationForMin("height", minHeight))
+        :
+        (()=>{
+          setHeightInput(value);
+          setNotification(null);
+        })()
+      )
+    }
+    ;
   };
   const resizerByKeypressBtn =(event:MouseEvent)=>{
     event.preventDefault();
-    const style:CSSProperties ={
-      width: widthInput === null? "auto" : `${widthInput}px`,
-      height: heightInput === null? "auton": `${heightInput}px` 
-    };
-    setImgLoadStyle(style);
+    if(widthInput !==null || heightInput !==null){
+      const style:CSSProperties ={
+        width: widthInput === null? "auto" : `${widthInput}px`,
+        height: heightInput === null? "auton": `${heightInput}px` 
+      };
+      setImgLoadStyle(style);
+      setWidthInput(null);
+      setHeightInput(null);
+    }else{
+      setNotification("Please enter a number")
+    }
+
   };
   const onMouseOverActualBtn =(event:MouseEvent)=>{
     const currentTarget =event.currentTarget;
@@ -167,6 +216,12 @@ const App =()=>{
       };
     };
   };
+
+  const closeNotification=(event:MouseEvent)=>{
+    setNotification(null);
+    setWidthInput(null);
+    setHeightInput(null);
+  };
   useEffect(()=>{
     if(canvas !==null && root !==null && loader !==null){
       const innerPadding =window.getComputedStyle(canvas).getPropertyValue('padding');
@@ -182,6 +237,7 @@ const App =()=>{
     };
   },[canvas, root ,loader]);
 return(
+  <>
   <div 
     id="inner"
     onMouseMove={onMouseMoveImgLoad}
@@ -388,13 +444,12 @@ return(
               alt="uploadedPhoto"
             />
           </>
-         
         </div>
       </div>
       }
     </div>
     <div id="footer">
-      <div id="copyRight">
+    <div id="copyRight">
         <span>© 2022.&nbsp;</span>
         <span className='name'>
           BadaHertz52
@@ -418,7 +473,26 @@ return(
         blog
       </a>
     </div>
+
   </div>
+  {notification!==null &&
+      <div id="notification">
+        <div className="inner">
+          <button
+            className='closeNotificationBtn'
+            onClick={closeNotification}
+          >
+            <IoIosCloseCircleOutline/>
+          </button>
+          <header>
+            <span>😞</span>
+            <span>Notifiction</span>
+          </header>
+          {notification}
+        </div>
+      </div>
+  }
+  </>
 )
 };
 
