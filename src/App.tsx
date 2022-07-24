@@ -210,6 +210,7 @@ const App =()=>{
         x:0,
         y:0
       };
+      drawImgCanvas();
     };
   };
 
@@ -217,6 +218,32 @@ const App =()=>{
     setNotification(null);
     setWidthInput(null);
     setHeightInput(null);
+  };
+  const downloadImg=()=>{
+    const downlink =document.getElementById("downlink") as HTMLAnchorElement ;
+    const downloadCanvas =document.getElementById("downloadCanvas") as HTMLCanvasElement;
+    const canvasUrl =downloadCanvas.toDataURL();
+    const pre= downlink.getAttribute("href");
+    downlink.href= canvasUrl;
+    console.log(downloadCanvas.width, downloadCanvas.height)
+    //downlink.click();
+    //console.log("url", url)
+  };
+  function drawImgCanvas(){
+    const downloadCanvas =document.getElementById("downloadCanvas") as HTMLCanvasElement;
+    const ctx =downloadCanvas.getContext('2d');
+    if(ctx !==null && imgLoadStyle !== undefined && url !==null){
+      ctx.clearRect(0,0, downloadCanvas.width, downloadCanvas.height);
+      const newImg = new Image();
+      const width = Number(imgLoadStyle.width);
+      const height= Number(imgLoadStyle.height);
+      downloadCanvas.width =width;
+      downloadCanvas.height =height;
+      newImg.onload=()=>{
+        ctx.drawImage(newImg,0,0 , width, height );
+      };
+      newImg.src =url; 
+    }
   };
   useEffect(()=>{
     if(canvas !==null && root !==null && loader !==null){
@@ -465,6 +492,11 @@ return(
             />
           </>
         </div>
+        <canvas
+          id="downloadCanvas"
+          style={imgLoadStyle}
+        >
+        </canvas>
       </div>
       }
     </div>
