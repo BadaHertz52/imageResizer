@@ -149,7 +149,7 @@
   text-align: center;
 }
 #resizerByKeypress .sizeInput input {
-  width: 50px;
+  width: 80px;
   margin: 0 16px;
 }
 #resizerByKeypress .sizeInput:nth-child(2) {
