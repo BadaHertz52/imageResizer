@@ -13,8 +13,8 @@ const App =()=>{
   const [url, setUrl]=useState<string|null>(null);
   const [widthInput, setWidthInput]=useState<string|null>(null);
   const [heightInput,setHeightInput]=useState<string|null>(null);
-  const minWidth =100;
-  const minHeight =100;
+  const minWidth :number =100;
+  const minHeight : number=100;
   const [maxSize, setMaxSize]=useState<{width:number|null, height: number|null}>({
     width :null,
     height:null 
