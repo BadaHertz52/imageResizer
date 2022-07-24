@@ -180,9 +180,7 @@ const App =()=>{
             width: width ,
             height : height,
           }
-          ;
-          console.log("mex", maxSize, width, height)
-          if(width>= maxSize.width){
+          ;          if(width>= maxSize.width){
             style.width =maxSize.width;
           };
         
