@@ -273,7 +273,11 @@ return(
     onMouseMove={onMouseMoveImgLoad}
     onMouseUp={onMouseUpImgLoad}  
   >
-    <header>Image Resizer</header>
+    <header
+      id="pageHeader"
+    >
+      Image Resizer
+    </header>
     <div id='directions'>
       <div className='firstDirection'>
         You can change the size of the picture by dragging mouse or enter the desired size.

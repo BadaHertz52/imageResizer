@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&display=swap');
+
 $smallTextSize: 12px;
 $basicTextSize: 16px;
 $grey:  #e9e8e8;
@@ -20,10 +22,16 @@ $lightgrey:#F7F5F2;
   display: flex;
   flex-direction: column;
   header{
-    font-size: 1.5rem;
     width: 100%;
     text-align: center;
     margin-bottom: 1rem;
+  }
+}
+#pageHeader{
+  font : {
+    size: $basicTextSize *2;
+    family :'Edu VIC WA NT Beginner', cursive;
+    weight:700;
   }
 }
 #directions{
