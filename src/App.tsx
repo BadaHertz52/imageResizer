@@ -21,6 +21,7 @@ const App =()=>{
     height:null 
   })
   const [imgLoadStyle, setImgLoadStyle]=useState<CSSProperties>();
+  const [imageSize, setImageSize]=useState<{width: number , height: number}| null>(null);
   const [notification, setNotification]=useState<string|null>(null);
   const drag =useRef<boolean>(false);
   const left ="left";
@@ -283,12 +284,28 @@ const App =()=>{
       const maxHeight =root.offsetHeight *0.6  ;
       const targetHeight = maxHeight - canvasTop.clientHeight -padding *2;
       setMaxSize({
-        width:cavasWidth,
-        height:targetHeight
+        width:Math.floor(cavasWidth) ,
+        height:Math.floor(targetHeight)
       })
 
     };
   },[canvas, root ,canvasTop]);
+  useEffect(()=>{
+    const imageDoc =document.getElementById("image");
+    if(imgLoadStyle !==undefined){
+
+      const width =imageDoc?.clientWidth;
+      const height =imageDoc?.clientHeight;
+
+      imageDoc !==null && 
+      setImageSize({
+        width:width as number, 
+        height: height as number 
+      });
+    }else{
+      setImageSize(null);
+    }
+  },[imgLoadStyle]);
 return(
   <>
   <div 
@@ -419,19 +436,21 @@ return(
                 </div>
               </div>
             </div>
-            {imgLoadStyle!== undefined &&
+            {imageSize !==null &&
               <div id="imgSize">
                 <header>Photo size</header>
                 <div className="size">
                   <div>
                     width : 
                     &nbsp;
-                    {imgLoadStyle.width}px
+                    {imageSize.width}
+                    px                
                   </div>
                   <div>
                     height:
                     &nbsp;
-                    {imgLoadStyle.height}px
+                    {imageSize.height}
+                    px
                   </div>
                 </div>
               </div>  
