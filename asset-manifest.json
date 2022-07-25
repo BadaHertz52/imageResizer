@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/imageResizer/static/css/main.e6ca9793.css",
+    "main.js": "/imageResizer/static/js/main.ffca6850.js",
+    "static/js/787.a922f9b5.chunk.js": "/imageResizer/static/js/787.a922f9b5.chunk.js",
+    "index.html": "/imageResizer/index.html",
+    "main.e6ca9793.css.map": "/imageResizer/static/css/main.e6ca9793.css.map",
+    "main.ffca6850.js.map": "/imageResizer/static/js/main.ffca6850.js.map",
+    "787.a922f9b5.chunk.js.map": "/imageResizer/static/js/787.a922f9b5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6ca9793.css",
+    "static/js/main.ffca6850.js"
+  ]
+}
