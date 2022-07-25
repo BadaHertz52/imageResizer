@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&display=swap");
 #root {
   width: 100vw;
   height: 100vw;
@@ -16,10 +17,15 @@
   flex-direction: column;
 }
 #inner header {
-  font-size: 1.5rem;
   width: 100%;
   text-align: center;
   margin-bottom: 1rem;
+}
+
+#pageHeader {
+  font-size: 32px;
+  font-family: "Edu VIC WA NT Beginner", cursive;
+  font-weight: 700;
 }
 
 #directions {
@@ -40,6 +46,8 @@
   position: relative;
   display: flex;
   align-items: center;
+  width: 90%;
+  margin: 0 5%;
 }
 
 .moreDirectionBtn {
@@ -118,6 +126,9 @@
           text-decoration-line: none;
   color: inherit;
 }
+#footer a:hover {
+  color: #0a3888;
+}
 
 #sizeBord {
   display: flex;
@@ -167,6 +178,7 @@
   border-radius: 10px;
   background: linear-gradient(to bottom, rgb(251, 251, 251) 5%, #e9e8e8 100%);
   border: 1px solid rgba(230, 230, 230, 0.45);
+  cursor: pointer;
 }
 #resizerByKeypress .resizerByKeypressBtn:hover {
   background: linear-gradient(to bottom, rgba(230, 230, 230, 0.45) 5%, rgb(251, 251, 251) 100%);
@@ -202,7 +214,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  font-size: 12px;
+  font-size: 14.4px;
 }
 #sizeDirection .sizes #maxSize .size > div, #sizeDirection .sizes #minSize .size > div, #sizeDirection .sizes #imgSize .size > div {
   width: 50%;
@@ -225,14 +237,54 @@
   box-shadow: 0px 0px 15px 2px rgba(190, 190, 190, 0.45);
 }
 
+#canvas_top {
+  position: relative;
+  width: 100%;
+  height: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+#downloader {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  font-size: 16px;
+  height: 100%;
+}
+#downloader .downloadBtn {
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(119, 117, 117);
+}
+#downloader .downloadBtn:hover {
+  color: black;
+}
+#downloader svg {
+  margin-left: 3.2px;
+  font-size: 17.6px;
+}
+#downloader a {
+  display: none;
+}
+
 #loader {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 50%;
+  height: 100%;
 }
 #loader #loaderActualBtn {
-  width: 70%;
+  width: 100%;
+  box-sizing: border-box;
   box-shadow: inset 0px 1px 0px 0px #9fb4f2;
   background: linear-gradient(to bottom, #378ec5 5%, #1b7cb8 100%);
   background-color: #378ec5;
@@ -245,7 +297,6 @@
   font-size: 1rem;
   font-weight: bold;
   padding: 6px 24px;
-  margin-bottom: 6px;
   text-decoration: none;
   text-align: center;
 }
