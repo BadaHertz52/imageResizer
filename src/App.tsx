@@ -65,32 +65,57 @@ const App =()=>{
         width: widthInput === null? "auto" : `${widthInput}px`,
         height: heightInput === null? "auto": `${heightInput}px` 
       };
-      
       if(maxSize.height !==null && maxSize.width !==null){
-        const heightCondition = minHeight <= height && height <= maxSize.height;
-        const widthCondition = minWidth <= width && width <= maxSize.width ;
-        if(heightCondition && widthCondition){
+        const heightCondition = heightInput !==null?  minHeight <= heightInput && heightInput <= maxSize.height : true;
+
+        const widthCondition = widthInput !==null? minWidth <= widthInput && widthInput <= maxSize.width: true ;
+        const changeImgSize=()=>{
           setImgLoadStyle(style);
           setNotification(null);
-        }else{
-          if(!heightCondition){
-            height> maxSize.height &&
+        };
+        const notifyHeight =()=>{
+          if(heightInput !== null  && maxSize.height !==null){
+            heightInput> maxSize.height &&
             setNotification(makeNotificationForMax("height", maxSize.height));
-
-            height< minHeight &&
+  
+            heightInput< minHeight &&
             setNotification(makeNotificationForMin("height", minHeight));
-          };
-          if(!widthCondition){
-            width > maxSize.width  &&
+          } 
+        };
+        const notifyWidth=()=>{
+          if(widthInput!== null && maxSize.width!==null){
+            widthInput > maxSize.width  &&
             setNotification
             (makeNotificationForMax("width", maxSize.width));
 
-            width < minWidth &&
+            widthInput < minWidth &&
             setNotification(
               makeNotificationForMin("width", minWidth)
             );
           }
         }
+          if(heightInput==null && widthInput !==null){
+            widthCondition ?
+            changeImgSize():
+            notifyWidth();
+          };
+          if(heightInput  !==null && widthInput ==null){
+            heightCondition?
+            changeImgSize():
+            notifyHeight();
+          };
+          if(heightInput !==null && widthInput!==null){
+            if(heightCondition && widthCondition){
+              changeImgSize();
+            }else{
+              if(!heightCondition){
+                notifyHeight();
+              };
+              if(!widthCondition){
+                notifyWidth();
+              }
+            }
+          }
       }
       setWidthInput(null);
       setHeightInput(null);
