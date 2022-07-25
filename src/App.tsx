@@ -112,6 +112,7 @@ const App =()=>{
     fileType?.classList.contains("on") && fileType?.classList.remove("on");
   }
   const onChangeFile=(event:ChangeEvent<HTMLInputElement>)=>{
+    setImgLoadStyle(undefined);
     const files =event.target.files; 
     if(files !==null){
       const file =files[0];
