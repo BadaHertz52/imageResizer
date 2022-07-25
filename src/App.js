@@ -1,3 +1,4 @@
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("react");
@@ -7,7 +8,7 @@ const gi_1 = require("../node_modules/react-icons/gi");
 const si_1 = require("../node_modules/react-icons/si");
 const io5_1 = require("../node_modules/react-icons/io5");
 const io_1 = require("../node_modules/react-icons/io");
-export default function App (){
+const App = () => {
     const root = document.getElementById("root");
     const canvas = document.getElementById("canvas");
     const canvasTop = document.getElementById("canvas_top");
@@ -22,6 +23,7 @@ export default function App (){
         height: null
     });
     const [imgLoadStyle, setImgLoadStyle] = (0, react_1.useState)();
+    const [imageSize, setImageSize] = (0, react_1.useState)(null);
     const [notification, setNotification] = (0, react_1.useState)(null);
     const drag = (0, react_1.useRef)(false);
     const left = "left";
@@ -42,42 +44,67 @@ export default function App (){
     };
     const onChangeWidthInput = (event) => {
         const value = event.target.value;
-        setWidthInput(value);
+        setWidthInput(Number(value));
     };
     const onChangeHeightInput = (event) => {
         const value = event.target.value;
-        setHeightInput(value);
+        setHeightInput(Number(value));
         ;
     };
     const resizerByKeypressBtn = (event) => {
         event.preventDefault();
         if (widthInput !== null || heightInput !== null) {
-            const height = Number(heightInput);
-            const width = Number(widthInput);
             const style = {
                 width: widthInput === null ? "auto" : `${widthInput}px`,
-                height: heightInput === null ? "auton" : `${heightInput}px`
+                height: heightInput === null ? "auto" : `${heightInput}px`
             };
             if (maxSize.height !== null && maxSize.width !== null) {
-                const heightCondition = minHeight <= height && height <= maxSize.height;
-                const widthCondition = minWidth <= width && width <= maxSize.width;
-                if (heightCondition && widthCondition) {
+                const heightCondition = heightInput !== null ? minHeight <= heightInput && heightInput <= maxSize.height : true;
+                const widthCondition = widthInput !== null ? minWidth <= widthInput && widthInput <= maxSize.width : true;
+                const changeImgSize = () => {
                     setImgLoadStyle(style);
                     setNotification(null);
-                }
-                else {
-                    if (!heightCondition) {
-                        height > maxSize.height &&
+                };
+                const notifyHeight = () => {
+                    if (heightInput !== null && maxSize.height !== null) {
+                        heightInput > maxSize.height &&
                             setNotification(makeNotificationForMax("height", maxSize.height));
-                        height < minHeight &&
+                        heightInput < minHeight &&
                             setNotification(makeNotificationForMin("height", minHeight));
                     }
-                    ;
-                    if (!widthCondition) {
-                        width > maxSize.width &&
+                };
+                const notifyWidth = () => {
+                    if (widthInput !== null && maxSize.width !== null) {
+                        widthInput > maxSize.width &&
                             setNotification(makeNotificationForMax("width", maxSize.width));
-                        width < minWidth &&
+                        widthInput < minWidth &&
                             setNotification(makeNotificationForMin("width", minWidth));
+                    }
+                };
+                if (heightInput == null && widthInput !== null) {
+                    widthCondition ?
+                        changeImgSize() :
+                        notifyWidth();
+                }
+                ;
+                if (heightInput !== null && widthInput == null) {
+                    heightCondition ?
+                        changeImgSize() :
+                        notifyHeight();
+                }
+                ;
+                if (heightInput !== null && widthInput !== null) {
+                    if (heightCondition && widthCondition) {
+                        changeImgSize();
+                    }
+                    else {
+                        if (!heightCondition) {
+                            notifyHeight();
+                        }
+                        ;
+                        if (!widthCondition) {
+                            notifyWidth();
+                        }
                     }
                 }
             }
@@ -247,17 +274,33 @@ export default function App (){
             const maxHeight = root.offsetHeight * 0.6;
             const targetHeight = maxHeight - canvasTop.clientHeight - padding * 2;
             setMaxSize({
-                width: cavasWidth,
-                height: targetHeight
+                width: Math.floor(cavasWidth),
+                height: Math.floor(targetHeight)
             });
         }
         ;
     }, [canvas, root, canvasTop]);
+    (0, react_1.useEffect)(() => {
+        const imageDoc = document.getElementById("image");
+        if (imgLoadStyle !== undefined) {
+            const width = imageDoc === null || imageDoc === void 0 ? void 0 : imageDoc.clientWidth;
+            const height = imageDoc === null || imageDoc === void 0 ? void 0 : imageDoc.clientHeight;
+            imageDoc !== null &&
+                setImageSize({
+                    width: width,
+                    height: height
+                });
+        }
+        else {
+            setImageSize(null);
+        }
+    }, [imgLoadStyle]);
     return ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "inner", onMouseMove: onMouseMoveImgLoad, onMouseUp: onMouseUpImgLoad }, { children: [(0, jsx_runtime_1.jsx)("header", Object.assign({ id: "pageHeader" }, { children: "Image Resizer" })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: 'directions' }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'firstDirection' }, { children: ["You can change the size of the picture by dragging mouse or enter the desired size.", (0, jsx_runtime_1.jsxs)("button", Object.assign({ className: 'moreDirectionBtn btn', onClick: onClickMoreDirectionBtn, onMouseOver: onMouseOverMoreDirectionBtn }, { children: [(0, jsx_runtime_1.jsx)(io5_1.IoHelpCircleOutline, {}), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'btnExplainBubble' }, { children: "Press button to show more direction" }))] }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'moreDirection', id: 'moreDirection' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'moreDirectionCloseBtn btn', onClick: onClickMoreDirectionCloseBtn }, { children: (0, jsx_runtime_1.jsx)(io_1.IoIosCloseCircleOutline, {}) })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'moreDirectionInner' }, { children: [(0, jsx_runtime_1.jsx)("p", { children: "When you change the size using the mouse, the size of the picture changes." }), (0, jsx_runtime_1.jsx)("p", { children: "If you waant to change size by dragging mouse, Put your mouse over the top ,bottom, left or right of the picuture." })] }))] }))] })), url !== null &&
                         (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "sizeBord" }, { children: [(0, jsx_runtime_1.jsxs)("form", Object.assign({ id: 'resizerByKeypress' }, { children: [(0, jsx_runtime_1.jsx)("header", { children: " Size Form" }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'sizeInput' }, { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: 'widthInput' }, { children: "width \u00A0:" })), (0, jsx_runtime_1.jsx)("input", { type: "number", name: 'widthInput', id: "widthInput", placeholder: 'number', value: widthInput === null ? "" : widthInput, onChange: onChangeWidthInput }), (0, jsx_runtime_1.jsx)("div", { children: "px" })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'sizeInput' }, { children: [(0, jsx_runtime_1.jsx)(ai_1.AiOutlineClose, {}), (0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: 'heightInput' }, { children: "height :" })), (0, jsx_runtime_1.jsx)("input", { type: "number", name: 'heightInput', id: "heightInput", placeholder: 'number', value: heightInput === null ? "" : heightInput, onChange: onChangeHeightInput }), (0, jsx_runtime_1.jsx)("div", { children: "px" })] })), (0, jsx_runtime_1.jsx)("button", Object.assign({ onClick: resizerByKeypressBtn, className: "resizerByKeypressBtn" }, { children: "Resizer" }))] })), maxSize.height !== null && maxSize.width !== null &&
-                                    (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "sizeDirection" }, { children: [(0, jsx_runtime_1.jsx)("header", { children: "Size Information" }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'sizes' }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "maxSize" }, { children: [(0, jsx_runtime_1.jsx)("header", { children: "Maximum" }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'size' }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: ["width: \u00A0", maxSize.width, "px"] }), (0, jsx_runtime_1.jsxs)("div", { children: ["height: \u00A0", maxSize.height, "px"] })] }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "minSize" }, { children: [(0, jsx_runtime_1.jsx)("header", { children: "Minium" }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "size" }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: ["width : \u00A0", minWidth, "px"] }), (0, jsx_runtime_1.jsxs)("div", { children: ["height : \u00A0", minHeight, "px"] })] }))] })), imgLoadStyle !== undefined &&
-                                                        (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "imgSize" }, { children: [(0, jsx_runtime_1.jsx)("header", { children: "Photo size" }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "size" }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: ["width : \u00A0", imgLoadStyle.width, "px"] }), (0, jsx_runtime_1.jsxs)("div", { children: ["height: \u00A0", imgLoadStyle.height, "px"] })] }))] }))] }))] }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "canvas" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: 'canvas_top' }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "loader" }, { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ id: "loaderActualBtn", htmlFor: 'loaderInput', onMouseEnter: onMouseOverActualBtn, onMouseOut: onMouseOutActualBtn }, { children: "Upload image file" })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'fileType' }, { children: "jpeg, jpg and png is possible" })), (0, jsx_runtime_1.jsx)("input", { id: "loaderInput", type: "file", accept: "image/jpeg, image/jpg, image/png", onChange: onChangeFile })] })), imgLoadStyle !== undefined &&
+                                    (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "sizeDirection" }, { children: [(0, jsx_runtime_1.jsx)("header", { children: "Size Information" }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'sizes' }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "maxSize" }, { children: [(0, jsx_runtime_1.jsx)("header", { children: "Maximum" }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'size' }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: ["width: \u00A0", maxSize.width, "px"] }), (0, jsx_runtime_1.jsxs)("div", { children: ["height: \u00A0", maxSize.height, "px"] })] }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "minSize" }, { children: [(0, jsx_runtime_1.jsx)("header", { children: "Minium" }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "size" }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: ["width : \u00A0", minWidth, "px"] }), (0, jsx_runtime_1.jsxs)("div", { children: ["height : \u00A0", minHeight, "px"] })] }))] })), imageSize !== null &&
+                                                        (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "imgSize" }, { children: [(0, jsx_runtime_1.jsx)("header", { children: "Photo size" }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "size" }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: ["width : \u00A0", imageSize.width, "px"] }), (0, jsx_runtime_1.jsxs)("div", { children: ["height: \u00A0", imageSize.height, "px"] })] }))] }))] }))] }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "canvas" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: 'canvas_top' }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "loader" }, { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ id: "loaderActualBtn", htmlFor: 'loaderInput', onMouseEnter: onMouseOverActualBtn, onMouseOut: onMouseOutActualBtn }, { children: "Upload image file" })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'fileType' }, { children: "jpeg, jpg and png is possible" })), (0, jsx_runtime_1.jsx)("input", { id: "loaderInput", type: "file", accept: "image/jpeg, image/jpg, image/png", onChange: onChangeFile })] })), imgLoadStyle !== undefined &&
                                         (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "downloader" }, { children: [(0, jsx_runtime_1.jsxs)("button", Object.assign({ className: 'downloadBtn', onClick: downloadImg }, { children: [(0, jsx_runtime_1.jsx)("span", { children: "Download" }), (0, jsx_runtime_1.jsx)(ai_1.AiOutlineDownload, {})] })), (0, jsx_runtime_1.jsx)("a", { id: "downlink", href: '/' })] }))] })), url !== null &&
                                 (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "load" }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ id: "imgLoad", style: imgLoadStyle }, { children: (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'resizerBtns ' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'left ', onMouseDown: (event) => onMouseDownResizerBtn(event, left) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'top ', onMouseDown: (event) => onMouseDownResizerBtn(event, top) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'right', onMouseDown: (event) => onMouseDownResizerBtn(event, right) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'bottom ', onMouseDown: (event) => onMouseDownResizerBtn(event, bottom) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) }))] })), (0, jsx_runtime_1.jsx)("img", { id: "image", src: url, alt: "uploadedPhoto" })] }) })), (0, jsx_runtime_1.jsx)("canvas", { id: "downloadCanvas", style: imgLoadStyle })] }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "footer" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "copyRight" }, { children: [(0, jsx_runtime_1.jsx)("span", { children: "\u00A9 2022.\u00A0" }), (0, jsx_runtime_1.jsxs)("a", Object.assign({ className: 'name', href: 'https://github.com/settings/profile', "aria-details": "link to go writer(=badahertz52\r\n            )'s githug profile" }, { children: ["BadaHertz52", (0, jsx_runtime_1.jsx)(gi_1.GiWhaleTail, {})] }))] })), (0, jsx_runtime_1.jsxs)("a", Object.assign({ href: 'https://github.com/BadaHertz52/imageResizer', "aria-details": "link to go  this project's github site " }, { children: [(0, jsx_runtime_1.jsx)(ai_1.AiFillGithub, {}), "\u00A0 Github"] })), (0, jsx_runtime_1.jsxs)("a", Object.assign({ href: 'https://velog.io/@badahertz52/Image-resizer-by-java-script', "aria-details": "link to go writer blog about thie project" }, { children: [(0, jsx_runtime_1.jsx)(si_1.SiBlogger, {}), "\u00A0 blog"] }))] }))] })), notification !== null &&
                 (0, jsx_runtime_1.jsx)("div", Object.assign({ id: "notification" }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "inner" }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'closeNotificationBtn', onClick: closeNotification }, { children: (0, jsx_runtime_1.jsx)(io_1.IoIosCloseCircleOutline, {}) })), (0, jsx_runtime_1.jsxs)("header", { children: [(0, jsx_runtime_1.jsx)("span", { children: "\uD83D\uDE1E" }), (0, jsx_runtime_1.jsx)("span", { children: "Notifiction" })] }), notification] })) }))] }));
 };
+exports.default = App;
