@@ -13,6 +13,7 @@ const App = () => {
     const canvas = document.getElementById("canvas");
     const loader = document.getElementById("loader");
     const [url, setUrl] = (0, react_1.useState)(null);
+    const [fileName, setFileName] = (0, react_1.useState)(null);
     const [widthInput, setWidthInput] = (0, react_1.useState)(null);
     const [heightInput, setHeightInput] = (0, react_1.useState)(null);
     const minWidth = 100;
@@ -104,6 +105,7 @@ const App = () => {
             const file = files[0];
             const fileUrl = URL.createObjectURL(file);
             setUrl(fileUrl);
+            setFileName(file.name);
         }
         else {
             console.log("There is no file");
@@ -210,11 +212,15 @@ const App = () => {
         const downlink = document.getElementById("downlink");
         const downloadCanvas = document.getElementById("downloadCanvas");
         const canvasUrl = downloadCanvas.toDataURL();
-        const pre = downlink.getAttribute("href");
         downlink.href = canvasUrl;
-        console.log(downloadCanvas.width, downloadCanvas.height);
-        //downlink.click();
-        //console.log("url", url)
+        if (fileName !== null) {
+            const dotIndex = fileName.indexOf(".");
+            const name = fileName.slice(0, dotIndex);
+            const fileType = fileName.slice(dotIndex);
+            const reName = `${name}_resizer${fileType}`;
+            downlink.download = reName;
+        }
+        downlink.click();
     };
     function drawImgCanvas() {
         const downloadCanvas = document.getElementById("downloadCanvas");

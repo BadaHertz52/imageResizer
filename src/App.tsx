@@ -11,6 +11,7 @@ const App =()=>{
   const canvas =document.getElementById("canvas");
   const loader =document.getElementById("loader");
   const [url, setUrl]=useState<string|null>(null);
+  const [fileName, setFileName]=useState<string|null>(null);
   const [widthInput, setWidthInput]=useState<string|null>(null);
   const [heightInput,setHeightInput]=useState<string|null>(null);
   const minWidth :number =100;
@@ -116,6 +117,7 @@ const App =()=>{
       const file =files[0];
       const fileUrl = URL.createObjectURL(file);
       setUrl(fileUrl);
+      setFileName(file.name)
     }else{
       console.log("There is no file")
     }
@@ -223,11 +225,15 @@ const App =()=>{
     const downlink =document.getElementById("downlink") as HTMLAnchorElement ;
     const downloadCanvas =document.getElementById("downloadCanvas") as HTMLCanvasElement;
     const canvasUrl =downloadCanvas.toDataURL();
-    const pre= downlink.getAttribute("href");
-    downlink.href= canvasUrl;
-    console.log(downloadCanvas.width, downloadCanvas.height)
-    //downlink.click();
-    //console.log("url", url)
+    downlink.href =canvasUrl;
+    if(fileName!==null){
+      const dotIndex = fileName.indexOf(".");
+      const name =fileName.slice(0, dotIndex);
+      const fileType =fileName.slice(dotIndex);
+      const reName =`${name}_resizer${fileType}`;
+      downlink.download = reName;
+    }
+    downlink.click();
   };
   function drawImgCanvas(){
     const downloadCanvas =document.getElementById("downloadCanvas") as HTMLCanvasElement;
