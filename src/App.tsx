@@ -1,6 +1,6 @@
 import React, { ChangeEvent, CSSProperties, MouseEvent, useEffect, useRef, useState } from 'react';
 import './assets/main.css';
-import {AiFillGithub, AiOutlineClose} from '../node_modules/react-icons/ai';
+import {AiFillGithub, AiOutlineClose, AiOutlineDownload} from '../node_modules/react-icons/ai';
 import {GiWhaleTail} from '../node_modules/react-icons/gi'; 
 import {SiBlogger} from '../node_modules/react-icons/si';
 import {IoHelpCircleOutline} from '../node_modules/react-icons/io5';
@@ -304,7 +304,7 @@ return(
         </button>
         <div className='moreDirectionInner'>
           <p>
-            When you change the size using the mouse, the size of the picture changes while maintaining the ratio of the original picture.
+            When you change the size using the mouse, the size of the picture changes.
           </p>
           <p>
             If you waant to change size by dragging mouse,
@@ -316,7 +316,7 @@ return(
     {url !==null &&
     <div id="sizeBord">
       <form  id='resizerByKeypress'>
-        <header> Enter size</header>
+        <header> Size Form</header>
         <div className='sizeInput'>
           <label
             htmlFor='widthInput'
@@ -361,7 +361,7 @@ return(
       {maxSize.height !== null && maxSize.width!==null &&
         <div id="sizeDirection">
           <header>
-              Size
+              Size Information
           </header>
           <div className='sizes'>
             <div  id="maxSize">
@@ -448,7 +448,11 @@ return(
             className='downloadBtn'
             onClick={downloadImg}
           >
-            Download
+            <span>
+              Download
+            </span>
+            <AiOutlineDownload/>
+            
           </button>
           <a
             id="downlink"
@@ -514,25 +518,30 @@ return(
     <div id="footer">
     <div id="copyRight">
         <span>© 2022.&nbsp;</span>
-        <span className='name'>
+        <a 
+          className='name'
+          href='https://github.com/settings/profile'
+          aria-details="link to go writer(=badahertz52
+            )'s githug profile"
+        >
           BadaHertz52
           <GiWhaleTail/>
-        </span>
+        </a>
       </div>
       <a
-        href='https://github.com/settings/profile'
-        aria-details="link to go writer(=badahertz52
-          )'s githug profile"
+        href='https://github.com/BadaHertz52/imageResizer'
+        aria-details="link to go  this project's github site "
       >
         <AiFillGithub/>
+        &nbsp;
         Github
       </a>
       <a
-        href='https://velog.io/@badahertz52'
-        aria-details="link to go writer(=badahertz52
-          )'s blog"
+        href='https://velog.io/@badahertz52/Image-resizer-by-java-script'
+        aria-details="link to go writer blog about thie project"
       >
         <SiBlogger/>
+        &nbsp;
         blog
       </a>
     </div>
