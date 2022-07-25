@@ -12,8 +12,8 @@ const App =()=>{
   const canvasTop =document.getElementById("canvas_top");
   const [url, setUrl]=useState<string|null>(null);
   const [fileName, setFileName]=useState<string|null>(null);
-  const [widthInput, setWidthInput]=useState<string|null>(null);
-  const [heightInput,setHeightInput]=useState<string|null>(null);
+  const [widthInput, setWidthInput]=useState<number|null>(null);
+  const [heightInput,setHeightInput]=useState<number|null>(null);
   const minWidth :number =100;
   const minHeight : number=100;
   const [maxSize, setMaxSize]=useState<{width:number|null, height: number|null}>({
@@ -51,21 +51,19 @@ const App =()=>{
   }
   const onChangeWidthInput=(event:ChangeEvent<HTMLInputElement>)=>{
     const value =event.target.value; 
-    setWidthInput(value) ; 
+    setWidthInput(Number(value)) ; 
   };
   const onChangeHeightInput=(event:ChangeEvent<HTMLInputElement>)=>{
     const value =event.target.value;
-    setHeightInput(value);
+    setHeightInput(Number(value));
     ;
   };
   const resizerByKeypressBtn =(event:MouseEvent)=>{
     event.preventDefault();
     if(widthInput !==null || heightInput !==null){
-      const height =Number(heightInput);
-      const width =Number(widthInput);
       const style:CSSProperties ={
         width: widthInput === null? "auto" : `${widthInput}px`,
-        height: heightInput === null? "auton": `${heightInput}px` 
+        height: heightInput === null? "auto": `${heightInput}px` 
       };
       
       if(maxSize.height !==null && maxSize.width !==null){
