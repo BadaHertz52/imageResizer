@@ -1,4 +1,3 @@
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = require("react");
@@ -8,7 +7,7 @@ const gi_1 = require("../node_modules/react-icons/gi");
 const si_1 = require("../node_modules/react-icons/si");
 const io5_1 = require("../node_modules/react-icons/io5");
 const io_1 = require("../node_modules/react-icons/io");
-const App = () => {
+export default function App (){
     const root = document.getElementById("root");
     const canvas = document.getElementById("canvas");
     const canvasTop = document.getElementById("canvas_top");
@@ -262,4 +261,3 @@ const App = () => {
                                 (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "load" }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ id: "imgLoad", style: imgLoadStyle }, { children: (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'resizerBtns ' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'left ', onMouseDown: (event) => onMouseDownResizerBtn(event, left) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'top ', onMouseDown: (event) => onMouseDownResizerBtn(event, top) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'right', onMouseDown: (event) => onMouseDownResizerBtn(event, right) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'bottom ', onMouseDown: (event) => onMouseDownResizerBtn(event, bottom) }, { children: (0, jsx_runtime_1.jsx)("div", { className: 'resizerPointer' }) }))] })), (0, jsx_runtime_1.jsx)("img", { id: "image", src: url, alt: "uploadedPhoto" })] }) })), (0, jsx_runtime_1.jsx)("canvas", { id: "downloadCanvas", style: imgLoadStyle })] }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "footer" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ id: "copyRight" }, { children: [(0, jsx_runtime_1.jsx)("span", { children: "\u00A9 2022.\u00A0" }), (0, jsx_runtime_1.jsxs)("a", Object.assign({ className: 'name', href: 'https://github.com/settings/profile', "aria-details": "link to go writer(=badahertz52\r\n            )'s githug profile" }, { children: ["BadaHertz52", (0, jsx_runtime_1.jsx)(gi_1.GiWhaleTail, {})] }))] })), (0, jsx_runtime_1.jsxs)("a", Object.assign({ href: 'https://github.com/BadaHertz52/imageResizer', "aria-details": "link to go  this project's github site " }, { children: [(0, jsx_runtime_1.jsx)(ai_1.AiFillGithub, {}), "\u00A0 Github"] })), (0, jsx_runtime_1.jsxs)("a", Object.assign({ href: 'https://velog.io/@badahertz52/Image-resizer-by-java-script', "aria-details": "link to go writer blog about thie project" }, { children: [(0, jsx_runtime_1.jsx)(si_1.SiBlogger, {}), "\u00A0 blog"] }))] }))] })), notification !== null &&
                 (0, jsx_runtime_1.jsx)("div", Object.assign({ id: "notification" }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "inner" }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ className: 'closeNotificationBtn', onClick: closeNotification }, { children: (0, jsx_runtime_1.jsx)(io_1.IoIosCloseCircleOutline, {}) })), (0, jsx_runtime_1.jsxs)("header", { children: [(0, jsx_runtime_1.jsx)("span", { children: "\uD83D\uDE1E" }), (0, jsx_runtime_1.jsx)("span", { children: "Notifiction" })] }), notification] })) }))] }));
 };
-exports.default = App;
