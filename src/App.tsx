@@ -9,7 +9,7 @@ import {IoIosCloseCircleOutline} from '../node_modules/react-icons/io';
 const App =()=>{
   const root =document.getElementById("root");
   const canvas =document.getElementById("canvas");
-  const loader =document.getElementById("loader");
+  const canvasTop =document.getElementById("canvas_top");
   const [url, setUrl]=useState<string|null>(null);
   const [fileName, setFileName]=useState<string|null>(null);
   const [widthInput, setWidthInput]=useState<string|null>(null);
@@ -252,19 +252,19 @@ const App =()=>{
     }
   };
   useEffect(()=>{
-    if(canvas !==null && root !==null && loader !==null){
+    if(canvas !==null && root !==null && canvasTop !==null){
       const innerPadding =window.getComputedStyle(canvas).getPropertyValue('padding');
       const padding =Number(innerPadding.slice(0, innerPadding.indexOf("px"))) ; 
       const cavasWidth = canvas.clientWidth - padding*2 ;
       const maxHeight =root.offsetHeight *0.6  ;
-      const targetHeight = maxHeight - loader.clientHeight -padding *2;
+      const targetHeight = maxHeight - canvasTop.clientHeight -padding *2;
       setMaxSize({
         width:cavasWidth,
         height:targetHeight
       })
 
     };
-  },[canvas, root ,loader]);
+  },[canvas, root ,canvasTop]);
 return(
   <>
   <div 
@@ -415,7 +415,7 @@ return(
     }
 
     <div id="canvas">
-      <div className='canvas_top'>
+      <div id='canvas_top'>
         <div id="loader">
           <label
             id="loaderActualBtn"
