@@ -127,13 +127,23 @@ const App =()=>{
   };
   const onMouseOverActualBtn =(event:MouseEvent)=>{
     const currentTarget =event.currentTarget;
+    const downloader =document.getElementById("downloader");
     const fileType =currentTarget.nextElementSibling;
     fileType?.classList.toggle("on");
+    const rootWidth =root?.offsetWidth;
+    if(downloader !==null && rootWidth !==undefined && rootWidth < 500){
+      fileType?.setAttribute("style",`height:${downloader.clientHeight}` );
+      downloader.setAttribute("style", "display:none");
+    }
   };
   const onMouseOutActualBtn =(event:MouseEvent)=>{
     const currentTarget =event.currentTarget;
     const fileType =currentTarget.nextElementSibling;
     fileType?.classList.contains("on") && fileType?.classList.remove("on");
+    const downloader =document.getElementById("downloader");
+    if(downloader !==null){
+      downloader.setAttribute("style", "display:block");
+    }
   }
   const onChangeFile=(event:ChangeEvent<HTMLInputElement>)=>{
     setImgLoadStyle(undefined);
