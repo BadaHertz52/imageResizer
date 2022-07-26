@@ -153,10 +153,10 @@ const App = () => {
         if (moreDirection !== null) {
             onMouseOverMoreDirectionBtn(event);
             moreDirection.classList.toggle("on");
-            sizeBord === null || sizeBord === void 0 ? void 0 : sizeBord.setAttribute("style", "display:none");
             const currentTarget = event.currentTarget;
             const btnExplainBubble = currentTarget.getElementsByClassName("btnExplainBubble")[0];
             btnExplainBubble.classList.contains("on") && btnExplainBubble.classList.remove("on");
+            sizeBord === null || sizeBord === void 0 ? void 0 : sizeBord.setAttribute("style", "display:none");
         }
     };
     function onMouseOverMoreDirectionBtn(event) {
