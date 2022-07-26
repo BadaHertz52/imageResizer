@@ -7,6 +7,9 @@ $desktopTextSize :18px;
 $grey:  #e9e8e8;
 $darkgrey: rgb(119, 117, 117);
 $lightgrey:#F7F5F2;
+div{
+  user-select: none;
+}
 body{
   margin: 0;
   display: flex;
