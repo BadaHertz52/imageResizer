@@ -132,7 +132,7 @@ const App =()=>{
     fileType?.classList.toggle("on");
     const rootWidth =root?.offsetWidth;
     if(downloader !==null && rootWidth !==undefined && rootWidth < 600){
-      fileType?.setAttribute("style",`height:${downloader.clientHeight}` );
+      fileType?.setAttribute("style",`height:${downloader.clientHeight}px` );
       downloader.setAttribute("style", "display:none");
     }
   };

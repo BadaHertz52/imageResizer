@@ -122,7 +122,7 @@ const App = () => {
         fileType === null || fileType === void 0 ? void 0 : fileType.classList.toggle("on");
         const rootWidth = root === null || root === void 0 ? void 0 : root.offsetWidth;
         if (downloader !== null && rootWidth !== undefined && rootWidth < 600) {
-            fileType === null || fileType === void 0 ? void 0 : fileType.setAttribute("style", `height:${downloader.clientHeight}`);
+            fileType === null || fileType === void 0 ? void 0 : fileType.setAttribute("style", `height:${downloader.clientHeight}px`);
             downloader.setAttribute("style", "display:none");
         }
     };
