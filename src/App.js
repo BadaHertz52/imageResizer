@@ -274,7 +274,7 @@ const App = () => {
         }
     }
     ;
-    (0, react_1.useEffect)(() => {
+    const getMaxSize = () => {
         if (canvas !== null && root !== null && canvasTop !== null) {
             const innerPadding = window.getComputedStyle(canvas).getPropertyValue('padding');
             const padding = Number(innerPadding.slice(0, innerPadding.indexOf("px")));
@@ -287,6 +287,10 @@ const App = () => {
             });
         }
         ;
+    };
+    window.onresize = () => getMaxSize();
+    (0, react_1.useEffect)(() => {
+        getMaxSize();
     }, [canvas, root, canvasTop]);
     (0, react_1.useEffect)(() => {
         const imageDoc = document.getElementById("image");

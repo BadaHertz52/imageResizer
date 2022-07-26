@@ -285,7 +285,7 @@ const App =()=>{
       newImg.src =url; 
     }
   };
-  useEffect(()=>{
+  const getMaxSize=()=>{
     if(canvas !==null && root !==null && canvasTop !==null){
       const innerPadding =window.getComputedStyle(canvas).getPropertyValue('padding');
       const padding =Number(innerPadding.slice(0, innerPadding.indexOf("px"))) ; 
@@ -298,6 +298,10 @@ const App =()=>{
       })
 
     };
+  };
+  window.onresize =()=> getMaxSize()
+  useEffect(()=>{
+    getMaxSize();
   },[canvas, root ,canvasTop]);
   useEffect(()=>{
     const imageDoc =document.getElementById("image");
