@@ -147,6 +147,7 @@ const App =()=>{
   }
   const onChangeFile=(event:ChangeEvent<HTMLInputElement>)=>{
     setImgLoadStyle(undefined);
+    root?.setAttribute("style","height:100%");
     const files =event.target.files; 
     if(files !==null){
       const file =files[0];
