@@ -38,7 +38,6 @@ const App =()=>{
     x:0,
     y:0
   });
-  const moreDirection =document.getElementById("moreDirection");
   const makeNotificationForMax=(what:string, maxSize:number):string=>{
     return(
       `The ${what} of the image can't exceed ${maxSize}px.If you want to increase the maximum width, increase the screen size.`
@@ -160,24 +159,25 @@ const App =()=>{
   };
   const onClickMoreDirectionBtn=(event:MouseEvent)=>{
     const sizeBord =document.getElementById("sizeBord");
-    if(moreDirection !==null){
-      onMouseOverMoreDirectionBtn(event);
-      moreDirection.classList.toggle("on");
-      const currentTarget= event.currentTarget;
-      const btnExplainBubble =currentTarget.getElementsByClassName("btnExplainBubble")[0];
-      btnExplainBubble.classList.contains("on")&& btnExplainBubble.classList.remove("on");
-      sizeBord?.setAttribute("style","display:none");
-    }
+    const currentTarget= event.currentTarget;
+    currentTarget.parentElement?.nextElementSibling?.classList.toggle("on");
+
+    const btnExplainBubble =currentTarget.getElementsByClassName("btnExplainBubble")[0];
+    btnExplainBubble.classList.contains("on")&& btnExplainBubble.classList.remove("on");
+    sizeBord?.setAttribute("style","display:none");
   };
+
   function onMouseOverMoreDirectionBtn (event:MouseEvent){
+    const currentTarget= event.currentTarget;
+    const moreDirection =currentTarget.parentElement?.nextElementSibling;
     if(!moreDirection?.classList.contains("on")){
-      const currentTarget= event.currentTarget;
       const btnExplainBubble =currentTarget.getElementsByClassName("btnExplainBubble")[0];
       btnExplainBubble.classList.toggle("on");
     }
   };
-  const onClickMoreDirectionCloseBtn=()=>{
-    moreDirection?.classList.remove("on");
+  const onClickMoreDirectionCloseBtn=(event:MouseEvent)=>{
+    const currentTarget=event.currentTarget;
+    currentTarget.parentElement?.classList.remove("on");
     const sizeBord =document.getElementById("sizeBord");
     sizeBord?.setAttribute("style","display:flex");
   }
