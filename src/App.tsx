@@ -131,7 +131,7 @@ const App =()=>{
     const fileType =currentTarget.nextElementSibling;
     fileType?.classList.toggle("on");
     const rootWidth =root?.offsetWidth;
-    if(downloader !==null && rootWidth !==undefined && rootWidth < 500){
+    if(downloader !==null && rootWidth !==undefined && rootWidth < 600){
       fileType?.setAttribute("style",`height:${downloader.clientHeight}` );
       downloader.setAttribute("style", "display:none");
     }
