@@ -1,16 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&display=swap');
 
 $smallTextSize: 12px;
+$middleTextSize:14px;
 $basicTextSize: 16px;
 $grey:  #e9e8e8;
 $darkgrey: rgb(119, 117, 117);
 $lightgrey:#F7F5F2;
+body{
+  margin: 0;
+}
 #root{
-  width: 100vw;
-  height: 100vw;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
-  
+  align-items: center;
   button{
     background-color: initial;
     border: none;
@@ -38,6 +42,7 @@ $lightgrey:#F7F5F2;
   width: 100%;
   height: fit-content;
   position: relative;
+  font-size: $middleTextSize;
   button{
     color: rgb(134, 134, 134);
     &:hover{
@@ -49,15 +54,22 @@ $lightgrey:#F7F5F2;
   position: relative;
   display: flex;
   align-items: center;
-  width: 90%;
-  margin: 0 5%;
+  width: 94%;
+  margin: 0 3%;
+  line-height: $basicTextSize;
 }
 .moreDirectionBtn {
   position: absolute;
   bottom:0;
-  right: 2rem;
+  right:0;
   padding: 0;
-  font-size: $basicTextSize;
+  width: $basicTextSize;
+  height: $basicTextSize;
+  svg{
+    font-size: $middleTextSize;
+  }
+  display: flex;
+  align-items: center;
 }
 .btnExplainBubble{
   display: none;
@@ -105,7 +117,7 @@ $lightgrey:#F7F5F2;
 }
 #footer{
   margin-top: 2rem;
-  font-size: 14px;
+  font-size: $middleTextSize;
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -183,29 +195,29 @@ $lightgrey:#F7F5F2;
     width: 100%;
     display: flex;
     flex-direction: column;
-    #maxSize , #minSize , #imgSize{
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      color: $darkgrey;
-      margin-bottom: 10px;
-      header{
-        font-size: $basicTextSize;
-        font-weight: 600;
-      }
-      .size{
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        font-size: $basicTextSize * 0.9;
-        & > div{
-          width: 50%;
-        }
-      }
-    }
     header{
       text-align: left;
       margin-bottom: 5px;
+    }
+  }
+}
+#maxSize , #minSize , #imgSize{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: $darkgrey;
+  margin-bottom: 10px;
+  header{
+    font-size: $middleTextSize;
+    font-weight: 600;
+  }
+  .size{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    font-size: $basicTextSize * 0.9;
+    & > div{
+      width: 50%;
     }
   }
 }
@@ -228,17 +240,19 @@ $lightgrey:#F7F5F2;
   align-items: center;
   justify-content: center;
   margin-bottom: 6px;
+  font-size: $basicTextSize;
 }
 #downloader{
   position:absolute;
   top:0;
   right:$basicTextSize;
-  font-size:  $basicTextSize;
+  font-size:inherit;
   height: 100%;
+  width: fit-content;
   .downloadBtn{
     width: 100%;
     height: 100%;
-    font-size: $basicTextSize;
+    font-size:inherit;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,7 +274,7 @@ $lightgrey:#F7F5F2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: fit-content;
   height: 100%;
   #loaderActualBtn{
     width: 100%;
@@ -274,7 +288,7 @@ $lightgrey:#F7F5F2;
     cursor:pointer;
     color:#fff;
     font-family:Arial;
-    font-size:1rem;
+    font-size:inherit;
     font-weight:bold;
     padding:6px 24px;
     text-decoration:none;
@@ -429,4 +443,54 @@ $lightgrey:#F7F5F2;
       }
     }
   };
+}
+
+@media screen and (max-width:425px) {
+  #sizeBord{
+    flex-direction: column;
+    align-items: center;
+  }
+  #resizerByKeypress, #sizeDirection{
+    width: 90%;
+    header{
+      margin-bottom: $smallTextSize;
+    }
+  }
+  #resizerByKeypress{
+    margin-right: 0;
+    margin-bottom: $smallTextSize;
+    font-size: $middleTextSize;
+    .sizeInput:nth-child(2){
+      margin-left: $basicTextSize;
+    }
+    .sizeInput:nth-child(3){
+      svg{
+        margin-right: 2px;
+      }
+    }
+    .resizerByKeypressBtn{
+      padding: $smallTextSize*0.5 ;
+    }
+  }
+  #canvas_top{
+    flex-direction: column;
+    font-size: $middleTextSize;
+    height: fit-content;
+  }
+  #loader{
+    .fileType.on{
+      background-color: #ffff;
+    }
+  }
+  #downloader{
+    position: relative;
+    height: fit-content;
+    top:initial;
+    right:initial;
+    margin-top: $middleTextSize *0.5;
+    
+  }
+  #footer{
+    font-size: $smallTextSize;
+  }
 }

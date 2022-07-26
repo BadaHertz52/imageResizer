@@ -1,9 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&display=swap");
+body {
+  margin: 0;
+}
+
 #root {
-  width: 100vw;
-  height: 100vw;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 #root button {
   background-color: initial;
@@ -34,6 +39,7 @@
   height: -moz-fit-content;
   height: fit-content;
   position: relative;
+  font-size: 14px;
 }
 #directions button {
   color: rgb(134, 134, 134);
@@ -46,16 +52,23 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 90%;
-  margin: 0 5%;
+  width: 94%;
+  margin: 0 3%;
+  line-height: 16px;
 }
 
 .moreDirectionBtn {
   position: absolute;
   bottom: 0;
-  right: 2rem;
+  right: 0;
   padding: 0;
-  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+}
+.moreDirectionBtn svg {
+  font-size: 14px;
 }
 
 .btnExplainBubble {
@@ -199,29 +212,30 @@
   display: flex;
   flex-direction: column;
 }
-#sizeDirection .sizes #maxSize, #sizeDirection .sizes #minSize, #sizeDirection .sizes #imgSize {
+#sizeDirection .sizes header {
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+#maxSize, #minSize, #imgSize {
   display: flex;
   flex-direction: column;
   width: 100%;
   color: rgb(119, 117, 117);
   margin-bottom: 10px;
 }
-#sizeDirection .sizes #maxSize header, #sizeDirection .sizes #minSize header, #sizeDirection .sizes #imgSize header {
-  font-size: 16px;
+#maxSize header, #minSize header, #imgSize header {
+  font-size: 14px;
   font-weight: 600;
 }
-#sizeDirection .sizes #maxSize .size, #sizeDirection .sizes #minSize .size, #sizeDirection .sizes #imgSize .size {
+#maxSize .size, #minSize .size, #imgSize .size {
   display: flex;
   flex-direction: row;
   width: 100%;
   font-size: 14.4px;
 }
-#sizeDirection .sizes #maxSize .size > div, #sizeDirection .sizes #minSize .size > div, #sizeDirection .sizes #imgSize .size > div {
+#maxSize .size > div, #minSize .size > div, #imgSize .size > div {
   width: 50%;
-}
-#sizeDirection .sizes header {
-  text-align: left;
-  margin-bottom: 5px;
 }
 
 #canvas {
@@ -245,19 +259,23 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 6px;
+  font-size: 16px;
 }
 
 #downloader {
   position: absolute;
   top: 0;
   right: 16px;
-  font-size: 16px;
+  font-size: inherit;
   height: 100%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 #downloader .downloadBtn {
   width: 100%;
   height: 100%;
-  font-size: 16px;
+  font-size: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -279,7 +297,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   height: 100%;
 }
 #loader #loaderActualBtn {
@@ -294,7 +314,7 @@
   cursor: pointer;
   color: #fff;
   font-family: Arial;
-  font-size: 1rem;
+  font-size: inherit;
   font-weight: bold;
   padding: 6px 24px;
   text-decoration: none;
@@ -455,4 +475,53 @@
   background-color: #2583be;
   color: white;
   font-weight: bolder;
+}
+
+@media screen and (max-width: 425px) {
+  #sizeBord {
+    flex-direction: column;
+    align-items: center;
+  }
+  #resizerByKeypress, #sizeDirection {
+    width: 90%;
+  }
+  #resizerByKeypress header, #sizeDirection header {
+    margin-bottom: 12px;
+  }
+  #resizerByKeypress {
+    margin-right: 0;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  #resizerByKeypress .sizeInput:nth-child(2) {
+    margin-left: 16px;
+  }
+  #resizerByKeypress .sizeInput:nth-child(3) svg {
+    margin-right: 2px;
+  }
+  #resizerByKeypress .resizerByKeypressBtn {
+    padding: 6px;
+  }
+  #canvas_top {
+    flex-direction: column;
+    font-size: 14px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  #loader .fileType.on {
+    background-color: white;
+  }
+  #downloader {
+    position: relative;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    top: initial;
+    right: initial;
+    margin-top: 7px;
+  }
+  #footer {
+    font-size: 12px;
+  }
 }/*# sourceMappingURL=main.css.map */
