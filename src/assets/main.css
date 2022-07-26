@@ -160,7 +160,7 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  width: 40%;
+  width: 45%;
   height: 100%;
   margin-right: 5%;
 }
@@ -540,5 +540,44 @@ body {
   }
   #resizerByKeypress .resizerByKeypressBtn {
     padding: 6px;
+  }
+}
+@media screen and (min-width: 600px) {
+  #sizeBord {
+    height: 220px;
+  }
+  #maxSize .size, #minSize .size, #imgSize .size {
+    width: 99%;
+  }
+  #maxSize .size > div:last-child, #minSize .size > div:last-child, #imgSize .size > div:last-child {
+    text-align: left;
+  }
+}
+@media screen and (min-width: 728px) {
+  #directions {
+    font-size: 16px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  #inner {
+    width: 800px;
+  }
+  #sizeDirection {
+    width: 45%;
+    align-items: center;
+  }
+  #sizeDirection .sizes {
+    width: 85%;
+  }
+  #sizeDirection .sizes .size > div:last-child {
+    text-align: right;
+  }
+}
+@media screen and (min-width: 1440px) {
+  #inner {
+    width: 1000px;
+  }
+  #sizeDirection {
+    padding: 16px;
   }
 }/*# sourceMappingURL=main.css.map */

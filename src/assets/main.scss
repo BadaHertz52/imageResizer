@@ -144,7 +144,7 @@ body{
   flex-direction: column; 
   justify-content: space-evenly;
   align-items: center;
-  width: 40%;
+  width: 45%;
   height: 100%;
   margin-right: 5%;
   .sizeInput{
@@ -512,7 +512,47 @@ body{
     }
   }
 }
-
-@media screen and (min-width:728px) {
+@media screen and (min-width:600px) {
+  #sizeBord{
+    height: 220px;
+  }
+  #maxSize, #minSize ,#imgSize{
+    .size{
+      width:99%;
+      &> div:last-child{
+        text-align: left;
+      }
+    }
+  }
   
+}
+@media screen and (min-width:728px) {
+  #directions{
+    font-size: $basicTextSize;
+  }
+}
+@media screen and (min-width:1024px) {
+  #inner{
+    width: 800px;
+  }
+  #sizeDirection{
+    width: 45%;
+    align-items: center;
+    .sizes{
+      width: 85%;
+      .size{
+        &>div:last-child{
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width:1440px) {
+  #inner{
+    width: 1000px;
+  }
+  #sizeDirection{
+    padding:$basicTextSize
+  }
 }
