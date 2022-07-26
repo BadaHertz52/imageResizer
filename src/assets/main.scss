@@ -3,6 +3,7 @@
 $smallTextSize: 12px;
 $middleTextSize:14px;
 $basicTextSize: 16px;
+$desktopTextSize :18px;
 $grey:  #e9e8e8;
 $darkgrey: rgb(119, 117, 117);
 $lightgrey:#F7F5F2;
@@ -116,11 +117,11 @@ body{
   }
 }
 #footer{
-  margin-top: 2rem;
+  margin: 2rem 5% ;
   font-size: $middleTextSize;
-  width: 100%;
+  width: 90%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   color:#8e9aaf;
   a:link,a:active, a:visited , a:hover{
     text-decoration-line: none;
@@ -147,6 +148,7 @@ body{
   width: 45%;
   height: 100%;
   margin-right: 5%;
+  font-size: $basicTextSize;
   .sizeInput{
     width: fit-content;
     box-sizing: border-box;
@@ -530,16 +532,40 @@ body{
   #directions{
     font-size: $basicTextSize;
   }
+  .firstDirection{
+    line-height: $basicTextSize * 1.2;
+  }
+  .moreDirectionBtn{
+    width: $basicTextSize * 1.2;
+    height: $basicTextSize * 1.2;
+    right: $basicTextSize;
+    svg{
+      font-size: $basicTextSize*1.2;
+    }
+  }
 }
 @media screen and (min-width:1024px) {
   #inner{
     width: 800px;
+    margin-top: 5vh;
+  }
+  #directions, #sizeBord header{
+    font-size: $desktopTextSize;
+  }
+  #sizeBord{
+    height:250px;
+  }
+  #resizerByKeypress{
+    margin-right: $basicTextSize;
+  }
+  .resizerByKeypressBtn{
+    font-size: $desktopTextSize;
   }
   #sizeDirection{
-    width: 45%;
+    height: fit-content;
     align-items: center;
+    padding:$basicTextSize $basicTextSize*2.5;
     .sizes{
-      width: 85%;
       .size{
         &>div:last-child{
           text-align: right;
@@ -547,12 +573,14 @@ body{
       }
     }
   }
+  #maxSize , #minSize, #imgSize{
+    header{
+      font-size: $basicTextSize;
+  }
+}
 }
 @media screen and (min-width:1440px) {
   #inner{
     width: 1000px;
-  }
-  #sizeDirection{
-    padding:$basicTextSize
   }
 }

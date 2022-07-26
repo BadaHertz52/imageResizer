@@ -127,11 +127,11 @@ body {
 }
 
 #footer {
-  margin-top: 2rem;
+  margin: 2rem 5%;
   font-size: 14px;
-  width: 100%;
+  width: 90%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   color: #8e9aaf;
 }
 #footer a:link, #footer a:active, #footer a:visited, #footer a:hover {
@@ -163,6 +163,7 @@ body {
   width: 45%;
   height: 100%;
   margin-right: 5%;
+  font-size: 16px;
 }
 #resizerByKeypress .sizeInput {
   width: -webkit-fit-content;
@@ -557,27 +558,51 @@ body {
   #directions {
     font-size: 16px;
   }
+  .firstDirection {
+    line-height: 19.2px;
+  }
+  .moreDirectionBtn {
+    width: 19.2px;
+    height: 19.2px;
+    right: 16px;
+  }
+  .moreDirectionBtn svg {
+    font-size: 19.2px;
+  }
 }
 @media screen and (min-width: 1024px) {
   #inner {
     width: 800px;
+    margin-top: 5vh;
+  }
+  #directions, #sizeBord header {
+    font-size: 18px;
+  }
+  #sizeBord {
+    height: 250px;
+  }
+  #resizerByKeypress {
+    margin-right: 16px;
+  }
+  .resizerByKeypressBtn {
+    font-size: 18px;
   }
   #sizeDirection {
-    width: 45%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
     align-items: center;
-  }
-  #sizeDirection .sizes {
-    width: 85%;
+    padding: 16px 40px;
   }
   #sizeDirection .sizes .size > div:last-child {
     text-align: right;
+  }
+  #maxSize header, #minSize header, #imgSize header {
+    font-size: 16px;
   }
 }
 @media screen and (min-width: 1440px) {
   #inner {
     width: 1000px;
-  }
-  #sizeDirection {
-    padding: 16px;
   }
 }/*# sourceMappingURL=main.css.map */
