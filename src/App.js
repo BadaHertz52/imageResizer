@@ -153,11 +153,7 @@ const App = () => {
         if (moreDirection !== null) {
             onMouseOverMoreDirectionBtn(event);
             moreDirection.classList.toggle("on");
-            const sizeBordHeight = sizeBord === null || sizeBord === void 0 ? void 0 : sizeBord.clientHeight;
-            if (sizeBord !== undefined) {
-                moreDirection.setAttribute("style", `height: ${sizeBordHeight}px`);
-            }
-            ;
+            sizeBord === null || sizeBord === void 0 ? void 0 : sizeBord.setAttribute("style", "display:none");
             const currentTarget = event.currentTarget;
             const btnExplainBubble = currentTarget.getElementsByClassName("btnExplainBubble")[0];
             btnExplainBubble.classList.contains("on") && btnExplainBubble.classList.remove("on");
@@ -173,6 +169,8 @@ const App = () => {
     ;
     const onClickMoreDirectionCloseBtn = () => {
         moreDirection === null || moreDirection === void 0 ? void 0 : moreDirection.classList.remove("on");
+        const sizeBord = document.getElementById("sizeBord");
+        sizeBord === null || sizeBord === void 0 ? void 0 : sizeBord.setAttribute("style", "display:flex");
     };
     const onMouseDownResizerBtn = (event, direction) => {
         drag.current = true;
