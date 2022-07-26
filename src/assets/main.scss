@@ -143,10 +143,13 @@ body{
   display: flex;
   flex-direction: column; 
   justify-content: space-evenly;
+  align-items: center;
   width: 40%;
   height: 100%;
   margin-right: 5%;
   .sizeInput{
+    width: fit-content;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     padding-bottom: $basicTextSize;
@@ -170,6 +173,7 @@ body{
     border-bottom: 1px solid black;
   }
   .resizerByKeypressBtn{
+    width: 70%;
     margin-top: $basicTextSize * 0.5;
     padding: $basicTextSize * 0.8;
     border-radius: 10px;
@@ -204,6 +208,7 @@ body{
 #maxSize , #minSize , #imgSize{
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   color: $darkgrey;
   margin-bottom: 10px;
@@ -214,10 +219,13 @@ body{
   .size{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 90%;
     font-size: $basicTextSize * 0.9;
     & > div{
       width: 50%;
+    }
+    &> div:last-child{
+      text-align: right;
     }
   }
 }
@@ -445,7 +453,12 @@ body{
   };
 }
 
-@media screen and (max-width:425px) {
+@media screen and (min-width:500px) and (max-width:600px) {
+  #sizeDirection{
+    padding: $basicTextSize;
+  }
+}
+@media screen and (max-width:600px) {
   #sizeBord{
     flex-direction: column;
     align-items: center;
@@ -460,17 +473,6 @@ body{
     margin-right: 0;
     margin-bottom: $smallTextSize;
     font-size: $middleTextSize;
-    .sizeInput:nth-child(2){
-      margin-left: $basicTextSize;
-    }
-    .sizeInput:nth-child(3){
-      svg{
-        margin-right: 2px;
-      }
-    }
-    .resizerByKeypressBtn{
-      padding: $smallTextSize*0.5 ;
-    }
   }
   #canvas_top{
     flex-direction: column;
@@ -493,4 +495,24 @@ body{
   #footer{
     font-size: $smallTextSize;
   }
+}
+@media screen and (max-width:728px) {
+  #resizerByKeypress{
+    
+    .sizeInput:nth-child(2){
+      margin-left: $basicTextSize;
+    }
+    .sizeInput:nth-child(3){
+      svg{
+        margin-right: 2px;
+      }
+    }
+    .resizerByKeypressBtn{
+      padding: $smallTextSize*0.5 ;
+    }
+  }
+}
+
+@media screen and (min-width:728px) {
+  
 }
