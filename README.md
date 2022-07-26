@@ -50,9 +50,9 @@ ______________________
 ### <div id="layout"> 1. Layout </div>
 |page\view|mobile|desktop|
 |------|-----|------|
-|fist page|<img src="imgForReadMe/first.jpg" width="auto" height="200px" alt="first page in moblie"/> |<img src="imgForReadMe/first_width.jpg" width="auto" height="200px" alt="first page in desktop"/>|
-|upload page|<div> <img src="imgForReadMe/upload_small.jpg" width="auto" height="200px" alt="page when upload image file in small mobile">  <img src="imgForReadMe/upload.jpg" width="auto" height="200px" alt="page when upload image file in mobile"/></div>|<img src="imgForReadMe/upload_width.jpg" width="auto" height="200px" alt="page when upload image file in desktop">|
-|more direction|<img src="imgForReadMe/moredirection.jpg" alt="open more direction in mobile"  width="auto" height="200px"> |<img src="imgForReadMe/moredirection_width.jpg" alt="open more direction in desktop"  width="auto" height="200px">
+|fist page|<img src="imgForReadMe/first.jpg" width="auto" height="300px" alt="first page in moblie"/> |<img src="imgForReadMe/first_width.jpg" width="auto" height="300px" alt="first page in desktop"/>|
+|upload page|<div> <img src="imgForReadMe/upload_small.jpg" width="auto" height="300px" alt="page when upload image file in small mobile">  <img src="imgForReadMe/upload.jpg" width="auto" height="300px" alt="page when upload image file in mobile"/></div>|<img src="imgForReadMe/upload_width.jpg" width="auto" height="300px" alt="page when upload image file in desktop">|
+|more direction|<img src="imgForReadMe/moredirection.jpg" alt="open more direction in mobile"  width="auto" height="300px"> |<img src="imgForReadMe/moredirection_width.jpg" alt="open more direction in desktop"  width="auto" height="300px">
 
 ### <div id="function"> 2. Function </div> 
 #### 1) 사이즈에 대한 정보 제공
@@ -60,11 +60,11 @@ ______________________
 
 #### 2) 최대 사이즈 변경
   최대 사이즈는 창의 크기에 따라 조절됩니다. 
-<img src="imgForReadMe/maxSize.gif" height="200px" width="auto" alt="adjust maxSize" />
+<img src="imgForReadMe/maxSize.gif" height="300px" width="auto" alt="adjust maxSize" />
 
 #### 3) 사이즈 조절 방법: How resize image? 
 #### A. 마우스 드래그 (Drag Mouse)
-  <img src="imgForReadMe/resize_drag.gif" height="200px" width="auto" 
+  <img src="imgForReadMe/resize_drag.gif" height="300px" width="auto" 
   alt="resize image_file by dragging mouse" />
 
   사진의 상하좌우에는 버튼이 존재하고 , 해당 버튼을 누른 후에 드래그 하면 사진의 사이즈를 조절할 수 있습니다.
@@ -76,7 +76,7 @@ ______________________
 
 
 #### 4) 입력 가능한 사이즈에 대한 알림 (Notify size limit) 
-<img src ="imgForReadMe/notification.gif" height="200px" width="auto"  alt="notification"/> 
+<img src ="imgForReadMe/notification.gif" height="300px" width="auto"  alt="notification"/> 
 
 #### 5) 변경 된 사이즈의 이미지 파일 다운로드 (Download image file)
   Download 버튼을 누르면 변경된 사이즈의 이미지 파일을 다운로드 받을 수 있습니다. 
