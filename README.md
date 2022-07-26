@@ -50,9 +50,9 @@ ______________________
 ### <div id="layout"> 1. Layout </div>
 |page\view|mobile|desktop|
 |------|-----|------|
-|fist page|<img src="imgForReadMe/first.jpg" width="auto" height="150px" alt="first page in moblie"/> |<img src="imgForReadMe/first_width.jpg" width="auto" height="150px" alt="first page in desktop"/>|
-|upload page|<div> <img src="imgForReadMe/upload_small.jpg" width="auto" height="150px" alt="page when upload image file in small mobile">  <img src="imgForReadMe/upload.jpg" width="auto" height="150px" alt="page when upload image file in mobile"/></div>|<img src="imgForReadMe/upload_width.jpg" width="auto" height="150px" alt="page when upload image file in desktop">|
-|more direction|<img src="imgForReadMe/moredirection.jpg" alt="open more direction in mobile"  width="auto" height="150px"> |<img src="imgForReadMe/moredirection_width.jpg" alt="open more direction in desktop"  width="auto" height="150px">
+|fist page|<img src="imgForReadMe/first.jpg" width="auto" height="200px" alt="first page in moblie"/> |<img src="imgForReadMe/first_width.jpg" width="auto" height="200px" alt="first page in desktop"/>|
+|upload page|<div> <img src="imgForReadMe/upload_small.jpg" width="auto" height="200px" alt="page when upload image file in small mobile">  <img src="imgForReadMe/upload.jpg" width="auto" height="200px" alt="page when upload image file in mobile"/></div>|<img src="imgForReadMe/upload_width.jpg" width="auto" height="200px" alt="page when upload image file in desktop">|
+|more direction|<img src="imgForReadMe/moredirection.jpg" alt="open more direction in mobile"  width="auto" height="200px"> |<img src="imgForReadMe/moredirection_width.jpg" alt="open more direction in desktop"  width="auto" height="200px">
 
 ### <div id="function"> 2. Function </div> 
 #### 1) 사이즈에 대한 정보 제공
