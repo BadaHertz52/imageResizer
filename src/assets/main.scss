@@ -9,13 +9,15 @@ $darkgrey: rgb(119, 117, 117);
 $lightgrey:#F7F5F2;
 body{
   margin: 0;
+  display: flex;
 }
 #root{
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: height 300ms ease;
   button{
     background-color: initial;
     border: none;
@@ -23,13 +25,13 @@ body{
 }
 #inner{
   width: 80%;
-  margin-top: 10vh;
   display: flex;
   flex-direction: column;
+  margin-top:32px;
   header{
     width: 100%;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 }
 #pageHeader{
@@ -57,6 +59,7 @@ body{
   align-items: center;
   width: 94%;
   margin: 0 3%;
+  margin-bottom: $basicTextSize;
   line-height: $basicTextSize;
 }
 .moreDirectionBtn {
@@ -105,7 +108,7 @@ body{
   z-index: 10;
   .moreDirectionCloseBtn{
     position: absolute;
-    top:$basicTextSize * 1.5 ;
+    top:$basicTextSize * 1 ;
     right:$basicTextSize * 1.5 ;
     font-size: $basicTextSize;
   }
@@ -578,9 +581,4 @@ body{
       font-size: $basicTextSize;
   }
 }
-}
-@media screen and (min-width:1440px) {
-  #inner{
-    width: 1000px;
-  }
 }
