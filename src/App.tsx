@@ -1,4 +1,4 @@
-import React, { ChangeEvent, CSSProperties, MouseEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, CSSProperties, MouseEvent, TouchEvent, useEffect, useRef, useState } from 'react';
 import './assets/main.css';
 import {AiFillGithub, AiOutlineClose, AiOutlineDownload} from '../node_modules/react-icons/ai';
 import {GiWhaleTail} from '../node_modules/react-icons/gi'; 
@@ -180,20 +180,31 @@ const App =()=>{
     currentTarget.parentElement?.classList.remove("on");
     const sizeBord =document.getElementById("sizeBord");
     sizeBord?.setAttribute("style","display:flex");
-  }
-  const onMouseDownResizerBtn=(event:MouseEvent, direction:directionType)=>{
+  };
+  const readyResizeImg =(clientX:number, clientY:number, direction:directionType)=>{
     drag.current =true ;
     previousClient.current ={
-      x: event.clientX,
-      y: event.clientY
+      x: clientX,
+      y: clientY
     };
     dragDirection.current = direction ;
   };
-
-  const onMouseMoveImgLoad=(event:MouseEvent<HTMLDivElement>)=>{
+  const onMouseDownResizerBtn=(event:MouseEvent, direction:directionType)=>{
+    readyResizeImg(event.clientX, event.clientY, direction);
+  };  
+  const onTouchStartResizerBtn =(event:TouchEvent, direction:directionType)=>{
+    const changeTouche =event.changedTouches[0];
+    readyResizeImg(changeTouche.clientX, changeTouche.clientY, direction);
+  };
+  /**
+   * mouse, touch 의 움직임에 따라 imgLoad의 크기,높이를 변경하는 함수
+   * @param clientX 
+   * @param clientY 
+   */
+  const resizeImgLoad =(clientX:number, clientY:number)=>{
     if(drag.current){
-      const changeX = event.clientX - previousClient.current.x
-      const changeY =event.clientY - previousClient.current.y ;
+      const changeX = clientX - previousClient.current.x
+      const changeY =clientY - previousClient.current.y ;
       const imageDoc =document.getElementById("image");
       if(imageDoc !==null){
         const imgWidth= imageDoc.offsetWidth;
@@ -217,7 +228,8 @@ const App =()=>{
             width: width ,
             height : height,
           }
-          ;          if(width>= maxSize.width){
+          ; 
+          if(width>= maxSize.width){
             style.width =maxSize.width;
           };
         
@@ -238,8 +250,13 @@ const App =()=>{
       }
     };
   };
-
-  const onMouseUpImgLoad=(event:MouseEvent<HTMLDivElement>)=>{
+  const onMouseMoveImgLoad=(event:MouseEvent<HTMLDivElement>)=>{
+    resizeImgLoad(event.clientX, event.clientY);
+  };
+  const onTouchMoveImgLoad =(event:TouchEvent<HTMLDivElement>)=>{
+    resizeImgLoad(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+  };
+  const endResizeImgLoad=()=>{
     if(drag.current){
       drag.current = false;
       dragDirection.current= null;
@@ -325,7 +342,9 @@ return(
   <div 
     id="inner"
     onMouseMove={onMouseMoveImgLoad}
-    onMouseUp={onMouseUpImgLoad}  
+    onTouchMove={onTouchMoveImgLoad}
+    onMouseUp={endResizeImgLoad}
+    onTouchEnd={endResizeImgLoad}  
   >
     <header
       id="pageHeader"
@@ -530,6 +549,7 @@ return(
             <button 
               className='left '
               onMouseDown={(event)=>onMouseDownResizerBtn(event ,left)}
+              onTouchStart={(event)=>onTouchStartResizerBtn(event, left)}
             >
               <div className='resizerPointer'>
               </div>
@@ -537,6 +557,7 @@ return(
             <button 
               className='top '
               onMouseDown={(event)=>onMouseDownResizerBtn(event, top)}
+              onTouchStart={(event)=>onTouchStartResizerBtn(event, top)}
             >
               <div className='resizerPointer'>
               </div>
@@ -544,6 +565,7 @@ return(
             <button 
               className='right'
               onMouseDown={(event)=>onMouseDownResizerBtn(event,right)}
+              onTouchStart={(event)=>onTouchStartResizerBtn(event, right)}
             >
               <div className='resizerPointer'>
               </div>
@@ -551,6 +573,7 @@ return(
             <button 
               className='bottom '
               onMouseDown={(event)=>onMouseDownResizerBtn(event, bottom)}
+              onTouchStart={(event)=>onTouchStartResizerBtn(event, bottom)}
             >
               <div className='resizerPointer'>
               </div>
