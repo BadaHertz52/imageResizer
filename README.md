@@ -63,13 +63,13 @@ ______________________
 <img src="imgForReadMe/maxSize.gif" height="300px" width="auto" alt="adjust maxSize" />
 
 #### 3) 사이즈 조절 방법: How resize image? 
-#### A. 마우스 드래그 (Drag Mouse)
+#### A. 버튼 조작 (Press or touh button and Move)
   <img src="imgForReadMe/resize_drag.gif" height="300px" width="auto" 
   alt="resize image_file by dragging mouse" />
 
-  사진의 상하좌우에는 버튼이 존재하고 , 해당 버튼을 누른 후에 드래그 하면 사진의 사이즈를 조절할 수 있습니다.
+  사진의 상하좌우에는 버튼이 존재하고 , 해당 버튼을 누른 채로 마우스나 터치한 부분을 움직이면 사진의 사이즈를 조절할 수 있습니다.
   <br/>
-  하지만, 사진의 사이즈는 size information 에 적힌 최대 사이즈를 넘지 못하고, 최소 사이즈보다 더 작을 수 없습니다. 최대 사이즈를 넘는다면, 해당 사진의 사이즈는 최대 사이즈로 조정되고, 최소 사이즈보다 작게 마우스를 드래그하면 사진의 사이즈는 최소 사이즈로 조정됩니다. 
+  하지만, 사진의 사이즈는 size information 에 적힌 최대 사이즈를 넘지 못하고, 최소 사이즈보다 더 작을 수 없습니다.
 
 #### B. 수치 입력 (Enter number)
  size form에 원하는 수치를 입력하면 사진의 사이즈가 변경됩니다. 다만, 입력한 수치가 size information의 최대 사이즈 보다 큰 경우, 최소 사이즈 보다 작은 경우에는 해당 사실을 사용자에게 알려주는 알림창이 열립니다.
