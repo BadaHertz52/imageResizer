@@ -7,7 +7,7 @@
 * <a href="getting_start"> Getting start </a>
   *  Prerequities 
   *  Installing 
-* <a href="build_width"> Build width </a>
+* <a href="skill"> Tech Skill  </a>
 * <a href="example"> Example of use </a>
   * <a href="layout"> Layout </a>
   * <a href="function"> Function </a>
@@ -29,19 +29,11 @@ ______________________
 
 ______________________
 ### Installing 
-* Install react,typescript, react-dom, react-icon,
-  ```
-  $npx create-react-app@lates react_app_name ---typescript
 
-  $npm install --save react-icon
   ```
-* Install tsconfig.json 
+  $npm i
   ```
-    $npx tsc --init
-    //or
-    $yarn run tsc --init
-  ```
-## <div id="build_width" >Build width</div>
+## <div id="skill" > Tech skill </div>
 * react
 * typescript
 ______________________
